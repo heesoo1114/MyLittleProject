@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Post processing
+  - 
   - 
   - 
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Floor
+    uniqueID: 2362200005
+    locked: 0
+  - name: Deco
+    uniqueID: 304869175
+    locked: 0
+  - name: Player
+    uniqueID: 4826481
+    locked: 0
+  - name: AddDeco
+    uniqueID: 1281858863
     locked: 0
