@@ -17,14 +17,5 @@ public class ObjRenderer : MonoBehaviour
         Vector3 result = Vector3.Cross(Vector2.up, direction);
 
         _spriteRenderer.flipX = result.z > 0;
-
-        /*if (result.z > 0)
-        {
-            _spriteRenderer.flipX = true;
-        }
-        else
-        {
-            _spriteRenderer.flipY = false;   
-        }*/
     }
 }

@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class WeaponRenderer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] protected int _playerSortinOrder = 0;
+    protected SpriteRenderer _spriteRenderer;
+
+    private void Awake()
     {
-        
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void FlipSprite(bool value)
     {
-        
+        Vector3 localScale = Vector3.one;
+        if (value == true)
+            localScale.y = -1;
+        transform.localScale = localScale;
+    }
+
+    public void RenderBehindHead(bool value)
+    {
+        if (value == true)
+        {
+            _spriteRenderer.sortingOrder = _playerSortinOrder - 1;
+        }
+        else
+        {
+            _spriteRenderer.sortingOrder = _playerSortinOrder + 1;
+        }
     }
 }
