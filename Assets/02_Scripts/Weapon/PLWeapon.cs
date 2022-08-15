@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,9 +9,22 @@ public class PLWeapon : MonoBehaviour
     private WeaponRenderer _weaponRenderer;
     private float _deireAngle; // 무기가 바라보고자 하는 방향
 
+
+
     private void Awake()
     {
         AssignWeapon();
+    }
+
+    public void Shooting()
+    {
+        // 나중에 장전 상태 확인 if문 추가 ,, ( 스킬 진행 중 확인 if문 추가 가능성 있음 -> Weapon에 추가하는쪽으로 )
+        _weapon.TryShooting();
+    }
+
+    public void StopShooting()
+    {
+        _weapon.StopShooting();
     }
 
     public void AssignWeapon()

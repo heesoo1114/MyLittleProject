@@ -8,10 +8,26 @@ public class PLInput : MonoBehaviour
     public UnityEvent<Vector2> MovementKeyPress;
     public UnityEvent<Vector2> PointerPositionChange;
 
+    public UnityEvent ShootingButtonPress;
+    public UnityEvent ShootingButtonRealease;
+
     private void Update()
     {
         GetMovementInput();
         GetPointerInput();
+        GetShootingInput();
+    }
+
+    private void GetShootingInput()
+    {
+        if(Input.GetButtonDown("Fire1"))
+        {
+            ShootingButtonPress?.Invoke();
+        }
+        else
+        {
+            ShootingButtonRealease?.Invoke();
+        }
     }
 
     private void GetPointerInput()
