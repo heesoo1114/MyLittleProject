@@ -10,12 +10,22 @@ public class PLInput : MonoBehaviour
 
     public UnityEvent ShootingButtonPress;
     public UnityEvent ShootingButtonRealease;
+    public UnityEvent ReloadButtonPress;
 
     private void Update()
     {
         GetMovementInput();
         GetPointerInput();
         GetShootingInput();
+        GetReloadInput();
+    }
+
+    private void GetReloadInput()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            ReloadButtonPress?.Invoke();
+        }
     }
 
     private void GetShootingInput()

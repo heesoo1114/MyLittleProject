@@ -37,4 +37,13 @@ public class Bullet : MonoBehaviour
         _timeToLive += Time.fixedDeltaTime;
         _rigidbody.MovePosition(transform.position + _bulletData.bulletSpeed * transform.right * Time.fixedDeltaTime);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject); // 나중에 풀링으로 변경ㄷ
+        }
+    }
+
 }

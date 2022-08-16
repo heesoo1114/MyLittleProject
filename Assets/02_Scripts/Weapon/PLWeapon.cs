@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PLWeapon : MonoBehaviour
 {
@@ -9,8 +10,10 @@ public class PLWeapon : MonoBehaviour
     private WeaponRenderer _weaponRenderer;
     private float _deireAngle; // 무기가 바라보고자 하는 방향
 
-
-
+    [SerializeField]
+    private int MaxAmmo = 10000, totalAmmo = 200;
+    protected bool _isReloading = false;
+    public bool IsReloading { get => _isReloading; }
     private void Awake()
     {
         AssignWeapon();
@@ -18,7 +21,12 @@ public class PLWeapon : MonoBehaviour
 
     public void Shooting()
     {
-        // 나중에 장전 상태 확인 if문 추가 ,, ( 스킬 진행 중 확인 if문 추가 가능성 있음 -> Weapon에 추가하는쪽으로 )
+        // ( 스킬 진행 중 확인 if문 추가 가능성 있음 -> Weapon에 추가하는쪽으로 )
+        if(_isReloading == true)
+        {
+            _weapon.PlayCannotSound();
+            return;
+        }
         _weapon.TryShooting();
     }
 
@@ -47,5 +55,26 @@ public class PLWeapon : MonoBehaviour
     {
         _weaponRenderer.FlipSprite(_deireAngle > 90f || _deireAngle < -90f);
         _weaponRenderer.RenderBehindHead(_deireAngle > 0 && _deireAngle < 180f);
+    }
+
+    public void ReloadWeapon()
+    {
+        if( _isReloading == false && totalAmmo > 0  && _weapon.AmmoFull == false)
+        {
+            _isReloading = true;
+            _weapon.StopShooting();
+            StartCoroutine(ReloadAmmo());
+        }
+    }
+
+    IEnumerator ReloadAmmo()
+    {
+        _weapon.PlayReloadSound();
+        int reloadAmmo = Mathf.Min(totalAmmo, _weapon.EmptyBulletCnt);
+        totalAmmo -= reloadAmmo;
+        _weapon.Ammo += reloadAmmo;
+
+        _isReloading = false;
+        yield return null;
     }
 }

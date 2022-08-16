@@ -17,9 +17,35 @@ public class Weapon : MonoBehaviour
 
     public Transform _muzzle; // 총알출구
 
-    // Ammo
-    public UnityEvent AmmoChangeOn;
-    protected int _ammo = 1;
+    // Ammo 관련 코드
+    public UnityEvent<int> OnAmmoChange; // 총알 변경시 발생할 이벤트
+    [SerializeField] protected int _ammo; // 현재 총알 수
+
+    public int Ammo
+    {
+        get => _ammo;
+        set
+        {
+            _ammo = Mathf.Clamp(value, 0, _weaponData.ammoCapacity);
+            OnAmmoChange?.Invoke(_ammo);
+        }
+    }
+
+    public bool AmmoFull { get => Ammo == _weaponData.ammoCapacity; }
+    public int EmptyBulletCnt { get => _weaponData.ammoCapacity - _ammo; }
+
+    // Reload Sound 관련 
+    public UnityEvent OnPlayNoAmmo;
+    public UnityEvent OnPlayReload;
+
+    private void Start()
+    {
+        Ammo = _weaponData.ammoCapacity;
+        WeaponAudio wa = transform.Find("WeaponAudio").GetComponent<WeaponAudio>();
+        wa.SetAudioClip(_weaponData.shootClip,
+                        _weaponData.noAmmoClip,
+                        _weaponData.reloadClip);
+    }
 
     private void Update()
     {
@@ -34,10 +60,12 @@ public class Weapon : MonoBehaviour
             {
                 ShootingOn?.Invoke();
                 ShootBullet();
+                Ammo -= 1;
             }
             else
             {
                 shootingOn = false;
+                PlayCannotSound();
                 return;
             }
             FinishShooting();
@@ -78,5 +106,14 @@ public class Weapon : MonoBehaviour
     public void StopShooting()
     {
         shootingOn = false;
+    }
+    public void PlayReloadSound()
+    {
+        OnPlayReload?.Invoke();
+    }
+
+    public void PlayCannotSound()
+    {
+        OnPlayNoAmmo?.Invoke();
     }
 }
