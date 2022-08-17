@@ -69,12 +69,13 @@ public class PLWeapon : MonoBehaviour
 
     IEnumerator ReloadAmmo()
     {
+        yield return new WaitForSeconds(_weapon.WeaponData.reloadDelay);
+
         _weapon.PlayReloadSound();
         int reloadAmmo = Mathf.Min(totalAmmo, _weapon.EmptyBulletCnt);
         totalAmmo -= reloadAmmo;
         _weapon.Ammo += reloadAmmo;
 
         _isReloading = false;
-        yield return null;
     }
 }

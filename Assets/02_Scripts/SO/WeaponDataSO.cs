@@ -11,9 +11,7 @@ public class WeaponDataSO : ScriptableObject
 
     [Range(0, 999)] public int ammoCapacity = 100; // ÅºÃ¢ Å©±â
     [Range(0f, 1f)] public float shootDelay = 0.1f; // ¹ß»ç µô·¹ÀÌ
-    [Range(0f, 1f)] public float reloadDealy = 1f; // ÀåÀü µô·¹ÀÌ
-
-    [SerializeField] private int _bulleetCount = 1; // 
+    [Range(0f, 1f)] public float reloadDelay = 1f; // ÀåÀü µô·¹ÀÌ
 
     public AudioClip shootClip;
     public AudioClip noAmmoClip;

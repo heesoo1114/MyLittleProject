@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af61820a18380c24fba9686085268747, type: 3}
+  m_Name: ElecWandData
+  m_EditorClassIdentifier: 
+  bulletData: {fileID: 11400000, guid: 9721be6f9fc50fa4dbafefa2d537ba5d, type: 2}
+  weaponSprite: {fileID: 21300000, guid: 5f1aec9e25249264caba74b3e898f327, type: 3}
+  ammoCapacity: 20
+  shootDelay: 1
+  reloadDelay: 1
+  _bulleetCount: 1
+  shootClip: {fileID: 8300000, guid: 19a42ac545b66534fbdcf0eba8b5d47c, type: 3}
+  noAmmoClip: {fileID: 8300000, guid: f1590f452fab9d647a69963079dab5be, type: 3}
+  reloadClip: {fileID: 8300000, guid: ea204cb2b3f9f8b418e97221c06c48d1, type: 3}

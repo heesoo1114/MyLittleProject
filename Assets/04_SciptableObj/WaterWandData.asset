@@ -16,7 +16,7 @@ MonoBehaviour:
   weaponSprite: {fileID: 21300000, guid: 2ae65b9f04242694692767a92e40bd55, type: 3}
   ammoCapacity: 20
   shootDelay: 1
-  reloadDealy: 0.138
+  reloadDealy: 1
   _bulleetCount: 1
   shootClip: {fileID: 8300000, guid: 0663f116c5ded4044b22d93f7162220f, type: 3}
   noAmmoClip: {fileID: 8300000, guid: f1590f452fab9d647a69963079dab5be, type: 3}

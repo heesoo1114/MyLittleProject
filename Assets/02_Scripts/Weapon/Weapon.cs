@@ -9,8 +9,13 @@ public class Weapon : MonoBehaviour
     public UnityEvent ShootingOn;
     // public UnityEvent ShootingOff;
 
+    private WeaponChangeSystem _wcy;
     [SerializeField] protected WeaponDataSO _weaponData;
-    public WeaponDataSO WeaponData { get => _weaponData; }
+    public WeaponDataSO WeaponData 
+    { 
+        get => _weaponData;
+        set => _weaponData = value;
+    }
 
     protected bool delayOn = false;
     protected bool shootingOn = false;
@@ -38,8 +43,13 @@ public class Weapon : MonoBehaviour
     public UnityEvent OnPlayNoAmmo;
     public UnityEvent OnPlayReload;
 
-    private void Start()
+    //  WeaponDataChaneSystem Q, E Input ฐüทร
+    public UnityEvent ChangeWeaponQ;
+    public UnityEvent ChangeWeaponE;
+
+    private void Awake()
     {
+        _wcy = transform.parent.parent.GetComponentInChildren<WeaponChangeSystem>();
         Ammo = _weaponData.ammoCapacity;
         WeaponAudio wa = transform.Find("WeaponAudio").GetComponent<WeaponAudio>();
         wa.SetAudioClip(_weaponData.shootClip,
@@ -50,6 +60,20 @@ public class Weapon : MonoBehaviour
     private void Update()
     {
         UseWeapon();
+        ChangeWeaponData();
+    }
+
+    private void ChangeWeaponData()
+    {
+        _weaponData = _wcy._weaponData;
+        if ( Input.GetKeyDown(KeyCode.Q))
+        {
+            ChangeWeaponQ?.Invoke();
+        }
+        else if ( Input.GetKeyDown(KeyCode.E))
+        {
+            ChangeWeaponE?.Invoke();
+        }
     }
 
     private void UseWeapon()
