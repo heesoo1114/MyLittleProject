@@ -9,7 +9,7 @@ public class WeaponDataSO : ScriptableObject
 
     public Sprite weaponSprite;
 
-    [Range(0, 999)] public int ammoCapacity = 100; // ÅºÃ¢ Å©±â
+    [Range(0, 999)] public int manaAmount = 100; // ÅºÃ¢ Å©±â
     [Range(0f, 1f)] public float shootDelay = 0.1f; // ¹ß»ç µô·¹ÀÌ
     [Range(0f, 1f)] public float reloadDelay = 1f; // ÀåÀü µô·¹ÀÌ
 

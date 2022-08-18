@@ -6,10 +6,12 @@ using UnityEngine.Events;
 
 public class Weapon : MonoBehaviour
 {
+    private WeaponAudio wa;
+
+    #region 발사 관련 로직
     public UnityEvent ShootingOn;
     // public UnityEvent ShootingOff;
 
-    private WeaponChangeSystem _wcy;
     [SerializeField] protected WeaponDataSO _weaponData;
     public WeaponDataSO WeaponData 
     { 
@@ -21,37 +23,51 @@ public class Weapon : MonoBehaviour
     protected bool shootingOn = false;
 
     public Transform _muzzle; // 총알출구
+    #endregion
 
-    // Ammo 관련 코드
+    #region Mana 관련 로직
     public UnityEvent<int> OnAmmoChange; // 총알 변경시 발생할 이벤트
-    [SerializeField] protected int _ammo; // 현재 총알 수
+    [SerializeField] protected int _mana; // 현재 마나 수
 
-    public int Ammo
+    public int Mana
     {
-        get => _ammo;
+        get => _mana;
         set
         {
-            _ammo = Mathf.Clamp(value, 0, _weaponData.ammoCapacity);
-            OnAmmoChange?.Invoke(_ammo);
+            _mana = Mathf.Clamp(value, 0, _weaponData.manaAmount);
+            OnAmmoChange?.Invoke(_mana);
         }
     }
 
-    public bool AmmoFull { get => Ammo == _weaponData.ammoCapacity; }
-    public int EmptyBulletCnt { get => _weaponData.ammoCapacity - _ammo; }
-
+    public bool ManaFull { get => Mana == _weaponData.manaAmount; }
+    public int EmptyManaCnt { get => _weaponData.manaAmount - _mana; }
+    #endregion
     // Reload Sound 관련 
     public UnityEvent OnPlayNoAmmo;
     public UnityEvent OnPlayReload;
 
     //  WeaponDataChaneSystem Q, E Input 관련
+    private WeaponChangeSystem _wcy;
     public UnityEvent ChangeWeaponQ;
     public UnityEvent ChangeWeaponE;
+
+    // ChargingSkill 관련 
+    [HideInInspector]
+    public bool ChargingOn = false;
+    public UnityEvent NowFireState;
+    public UnityEvent NowWaterState;
+    public UnityEvent NowElecState;
+
+    // 스킬 사용 가능 상태 확인
+    public bool IsFireOn = false;
+    public bool IsWaterOn = false;
+    public bool IsElecOn = false;
 
     private void Awake()
     {
         _wcy = transform.parent.parent.GetComponentInChildren<WeaponChangeSystem>();
-        Ammo = _weaponData.ammoCapacity;
-        WeaponAudio wa = transform.Find("WeaponAudio").GetComponent<WeaponAudio>();
+        Mana = _weaponData.manaAmount;
+        wa = transform.Find("WeaponAudio").GetComponent<WeaponAudio>();
         wa.SetAudioClip(_weaponData.shootClip,
                         _weaponData.noAmmoClip,
                         _weaponData.reloadClip);
@@ -60,7 +76,9 @@ public class Weapon : MonoBehaviour
     private void Update()
     {
         UseWeapon();
+        UseChargingSkill();
         ChangeWeaponData();
+        wa.SetAudioClip(_weaponData.shootClip, _weaponData.noAmmoClip, _weaponData.reloadClip);
     }
 
     private void ChangeWeaponData()
@@ -76,15 +94,55 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    private void UseChargingSkill()
+    {
+        if ( ChargingOn == true )
+        {
+            if ( Mana >= 20 )
+            {
+                if (_wcy.NowFire == true && IsFireOn == true)
+                {
+                    NowFireState?.Invoke();
+                    Mana -= 20;
+                    IsFireOn = false;
+                }
+                else if (_wcy.NowElec == true && IsElecOn == true)
+                {
+                    NowElecState?.Invoke();
+                    Mana -= 20;
+                    IsElecOn = false;
+                }
+                else if(_wcy.NowWater == true && IsWaterOn == true)
+                {
+                    NowWaterState?.Invoke();
+                    Mana -= 20;
+                    IsWaterOn = false;
+                }
+                else
+                {
+                    ChargingOn = false;
+                    PlayCannotSound();
+                    return;
+                }
+            }
+            else
+            {
+                ChargingOn = false;
+                PlayCannotSound();
+                return;
+            }
+        }
+    }
+
     private void UseWeapon()
     {
-        if ( shootingOn == true && delayOn == false)
+        if ( shootingOn == true && ChargingOn == false)
         {
-            if (_ammo > 0)
+            if (_mana > 0)
             {
                 ShootingOn?.Invoke();
                 ShootBullet();
-                Ammo -= 1;
+                Mana -= 1;
             }
             else
             {
@@ -92,21 +150,8 @@ public class Weapon : MonoBehaviour
                 PlayCannotSound();
                 return;
             }
-            FinishShooting();
+            shootingOn = false;
         }
-    }
-
-    private void FinishShooting()
-    {
-        // StartCoroutine(DelayShootTime());
-        shootingOn = false;
-    }
-
-    IEnumerator DelayShootTime()
-    {
-        delayOn = true;
-        yield return new WaitForSeconds(_weaponData.shootDelay);
-        delayOn = false;
     }
 
     private void ShootBullet()
@@ -116,7 +161,7 @@ public class Weapon : MonoBehaviour
 
     private void SpawnBullet(Vector3 position, Quaternion rot, bool isEnemyBullet)
     {
-        Bullet bullet = Instantiate(_weaponData.bulletData.bulletPrefab).GetComponent<Bullet>();
+        Bullet bullet = Instantiate(_weaponData.bulletData.bulletPrefab).GetComponent<Bullet>(); // 풀링으로 변경
         bullet.SetPositionAndRotation(position, rot);
         bullet.IsEnemy = isEnemyBullet;
         bullet.BulletData = _weaponData.bulletData;
@@ -126,11 +171,20 @@ public class Weapon : MonoBehaviour
     {
         shootingOn = true;
     }
-
     public void StopShooting()
     {
         shootingOn = false;
     }
+
+    public void TryCharging()
+    {
+        ChargingOn = true;
+    }
+    public void StopCharging()
+    {
+        ChargingOn = false;
+    }
+
     public void PlayReloadSound()
     {
         OnPlayReload?.Invoke();

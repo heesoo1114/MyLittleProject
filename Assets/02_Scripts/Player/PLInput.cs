@@ -10,6 +10,8 @@ public class PLInput : MonoBehaviour
 
     public UnityEvent ShootingButtonPress;
     public UnityEvent ShootingButtonRealease;
+    public UnityEvent ChargingButtonPress;
+    public UnityEvent ChargingButtonRealease;
     public UnityEvent ReloadButtonPress;
 
     private void Update()
@@ -18,6 +20,19 @@ public class PLInput : MonoBehaviour
         GetPointerInput();
         GetShootingInput();
         GetReloadInput();
+        GetChargingInput();
+    }
+
+    private void GetChargingInput()
+    {
+        if (Input.GetButtonDown("Fire2"))
+        {
+            ChargingButtonPress?.Invoke();
+        }
+        else
+        {
+            ChargingButtonRealease?.Invoke();
+        }
     }
 
     private void GetReloadInput()

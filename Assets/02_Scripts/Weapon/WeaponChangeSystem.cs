@@ -13,9 +13,9 @@ public class WeaponChangeSystem : MonoBehaviour
     public UnityEvent ToWaterWeaponData;
     public UnityEvent ToElecWeaponData;
 
-    private bool NowFire = true;
-    private bool NowWater = false;
-    private bool NowElec = false;
+    [HideInInspector] public bool NowFire = true;
+    [HideInInspector] public bool NowWater = false;
+    [HideInInspector] public bool NowElec = false;
 
     private SpriteRenderer _spriteRenderer;
     private Weapon _weapon;

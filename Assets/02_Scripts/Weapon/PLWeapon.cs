@@ -10,8 +10,7 @@ public class PLWeapon : MonoBehaviour
     private WeaponRenderer _weaponRenderer;
     private float _deireAngle; // 무기가 바라보고자 하는 방향
 
-    [SerializeField]
-    private int MaxAmmo = 10000, totalAmmo = 200;
+    private int totalMana = 100;
     protected bool _isReloading = false;
     public bool IsReloading { get => _isReloading; }
     private void Awake()
@@ -30,9 +29,24 @@ public class PLWeapon : MonoBehaviour
         _weapon.TryShooting();
     }
 
+    public void Charging()
+    {
+        if(_isReloading == true)
+        {
+            _weapon.PlayCannotSound();
+            return;
+        }
+        _weapon.TryCharging();
+    }
+
     public void StopShooting()
     {
         _weapon.StopShooting();
+    }
+
+    public void StopCharging()
+    {
+        _weapon.StopCharging();
     }
 
     public void AssignWeapon()
@@ -59,7 +73,7 @@ public class PLWeapon : MonoBehaviour
 
     public void ReloadWeapon()
     {
-        if( _isReloading == false && totalAmmo > 0  && _weapon.AmmoFull == false)
+        if( _isReloading == false && totalMana > 0 && _weapon.ManaFull == false)
         {
             _isReloading = true;
             _weapon.StopShooting();
@@ -72,10 +86,10 @@ public class PLWeapon : MonoBehaviour
         yield return new WaitForSeconds(_weapon.WeaponData.reloadDelay);
 
         _weapon.PlayReloadSound();
-        int reloadAmmo = Mathf.Min(totalAmmo, _weapon.EmptyBulletCnt);
-        totalAmmo -= reloadAmmo;
-        _weapon.Ammo += reloadAmmo;
-
+        int reloadMana = Mathf.Min(totalMana, _weapon.EmptyManaCnt);
+        totalMana -= reloadMana;
+        _weapon.Mana += reloadMana;
+        totalMana += 100;
         _isReloading = false;
     }
 }
