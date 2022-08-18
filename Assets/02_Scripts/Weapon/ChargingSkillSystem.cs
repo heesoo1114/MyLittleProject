@@ -7,7 +7,9 @@ public class ChargingSkillSystem : MonoBehaviour
 {
     private Weapon _weapon;
     private WeaponChangeSystem _wcy;
-    
+    public GameObject OsccUI;
+    private OnSkillChargingCheckUI _osccUI;
+
     public int stack = 10;
 
     public int fireShootCount = 0;
@@ -18,8 +20,8 @@ public class ChargingSkillSystem : MonoBehaviour
     {
         _weapon = transform.parent.GetComponent<Weapon>();
         _wcy = transform.parent.parent.parent.GetComponentInChildren<WeaponChangeSystem>();
+        _osccUI = OsccUI.GetComponent<OnSkillChargingCheckUI>();
     }
-
 
     public void NormalShootCount()
     {
@@ -44,17 +46,32 @@ public class ChargingSkillSystem : MonoBehaviour
 
     private void CanUseSkill()
     {
-        if ( fireShootCount >= stack )
+        if (fireShootCount >= stack)
         {
             _weapon.IsFireOn = true;
+            _osccUI.OnFireSkill?.Invoke();
+        }
+        else if (fireShootCount < stack)
+        {
+            _osccUI.OffFireSkill?.Invoke();
         }
         if ( waterShootCount >= stack )
         {
             _weapon.IsWaterOn = true;
+            _osccUI.OnWaterSkill?.Invoke();
+        }
+        else if (waterShootCount < stack)
+        {
+            _osccUI.OffWaterSkill?.Invoke();
         }
         if ( elecShootCount >= stack )
         {
             _weapon.IsElecOn = true;
+            _osccUI.OnElecSkill?.Invoke();
+        }
+        else if (elecShootCount < stack)
+        {
+            _osccUI.OffElecSkill?.Invoke();
         }
     }
 

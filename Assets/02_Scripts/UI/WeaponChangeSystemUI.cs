@@ -18,6 +18,12 @@ public class WeaponChangeSystemUI : MonoBehaviour
         _fireWeaponImage.color = Color.white;
     }
 
+    public void OnFireWeaponUI()
+    {
+        _fireWeapon.color = Color.red;
+        _fireWeaponImage.color = Color.red;
+    }
+
     public void OutFireWeaponUI()
     {
         Color color = _fireWeapon.color;
@@ -36,6 +42,13 @@ public class WeaponChangeSystemUI : MonoBehaviour
         _waterWeaponImage.color = Color.white;
     }
 
+    public void OnWaterWeaponUI()
+    {
+        print("111");
+        _waterWeapon.color = Color.blue;
+        _waterWeaponImage.color = Color.blue;
+    }
+
     public void OutWaterWeaponUI()
     {
         Color color = _waterWeapon.color;
@@ -52,6 +65,12 @@ public class WeaponChangeSystemUI : MonoBehaviour
     {
         _elecWeapon.color = Color.white;
         _elecWeaponImage.color = Color.white;
+    }
+
+    public void OnElecWeaponUI()
+    {
+        _elecWeapon.color = Color.yellow;
+        _elecWeaponImage.color = Color.yellow;
     }
 
     public void OutElecWeaponUI()
