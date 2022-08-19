@@ -18,7 +18,7 @@ public class ChargingSkillSystem : MonoBehaviour
 
     public GameObject fireCirclePrefab;
     private FireCircle _fireCircle;
-    public GameObject IciclePrefab;
+    // public WeaponDataSO IceWandData;
     // private Icicle _icicle;
     public GameObject ThunderPrefab;
     // private Thunder _thunder;
@@ -118,9 +118,28 @@ public class ChargingSkillSystem : MonoBehaviour
     public void Icicle()
     {
         print("waterSkill");
-        _weapon.ChargingOn = false;
         waterShootCount = 0;
+        _weapon.WaterSkillRunning = true;
+        StartCoroutine(ChangeIceFromWater());
     }
 
+    IEnumerator ChangeIceFromWater()
+    {
+        _wcy.ToIceWeapon();
+        while(true)
+        {
+            for(int i = 0; i < 3; i ++)
+            {
+                if(i == 0) yield return new WaitForSeconds(_weapon.WeaponData.shootDelay);
+                _weapon.ShootBullet();
+                if (i == 2) break;
+                yield return new WaitForSeconds(_weapon.WeaponData.shootDelay);
+            }
+            break;
+        }
+        _wcy.ResetToWaterWeapon();
+        _weapon.ChargingOn = false;
+        _weapon.WaterSkillRunning = false;
+    }
     
 }

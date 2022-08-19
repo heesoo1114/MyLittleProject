@@ -68,7 +68,9 @@ public class Weapon : MonoBehaviour
     public bool FireSkillRunning = false;
     public bool WaterSkillRunning = false;
     public bool ElecSkillRunning = false;
+    public bool AnySkillRunning = false;
     #endregion
+
     private void Awake()
     {
         _wcy = transform.parent.parent.GetComponentInChildren<WeaponChangeSystem>();
@@ -84,7 +86,20 @@ public class Weapon : MonoBehaviour
         UseWeapon();
         UseChargingSkill();
         ChangeWeaponData();
+        AnySkillRunningCheck();
         wa.SetAudioClip(_weaponData.shootClip, _weaponData.noAmmoClip, _weaponData.reloadClip);
+    }
+
+    private void AnySkillRunningCheck()
+    {
+        if (FireSkillRunning == true || ElecSkillRunning == true || WaterSkillRunning == true)
+        {
+            AnySkillRunning = true;
+        }
+        else if (FireSkillRunning == false && ElecSkillRunning == false && WaterSkillRunning == false)
+        {
+            AnySkillRunning = false;
+        }
     }
 
     private void ChangeWeaponData()
@@ -106,31 +121,42 @@ public class Weapon : MonoBehaviour
         {
             if ( Mana >= 20 )
             {
-                if (_wcy.NowFire == true && IsFireOn == true)
+                if (AnySkillRunning == false)
                 {
-                    NowFireState?.Invoke();
-                    Mana -= 20;
-                }
-                else if (_wcy.NowElec == true && IsElecOn == true)
-                {
-                    NowElecState?.Invoke();
-                    Mana -= 20;
-                }
-                else if(_wcy.NowWater == true && IsWaterOn == true)
-                {
-                    NowWaterState?.Invoke();
-                    Mana -= 20;
-                }
-                else
-                {
-                    StopCharging();
-                    if(FireSkillRunning == true || ElecSkillRunning == true || WaterSkillRunning == true)
+                    if (_wcy.NowFire == true && IsFireOn == true)
                     {
-                        
+                        NowFireState?.Invoke();
+                        Mana -= 20;
                     }
-                    else if(FireSkillRunning == false || ElecSkillRunning == false || WaterSkillRunning == false)
+                    else if (_wcy.NowElec == true && IsElecOn == true)
                     {
-                        print("스킬을 사용할 수 없습니다"); // UI 패널로 고치기
+                        NowElecState?.Invoke();
+                        Mana -= 20;
+                    }
+                    else if (_wcy.NowWater == true && IsWaterOn == true)
+                    {
+                        NowWaterState?.Invoke();
+                        Mana -= 20;
+                    }
+                    else if (_wcy.NowFire == true && IsFireOn == false && FireSkillRunning == false)
+                    {
+                        StopCharging();
+                        print("스킬을 사용할 수 없습니다"); // UI로 고치기
+                    }
+                    else if (_wcy.NowElec == true && IsElecOn == false && ElecSkillRunning == false)
+                    {
+                        StopCharging();
+                        print("스킬을 사용할 수 없습니다"); // UI로 고치기
+                    }
+                    else if (_wcy.NowWater == true && IsWaterOn == false && WaterSkillRunning == false)
+                    {
+                        StopCharging();
+                        print("스킬을 사용할 수 없습니다"); // UI로 고치기
+                    }
+                    else if (AnySkillRunning == true)
+                    {
+                        print("스킬을 사용하고 있습니다"); // UI로 고치기
+                        return;
                     }
                 }
             }
@@ -138,20 +164,19 @@ public class Weapon : MonoBehaviour
             {
                 ChargingOn = false;
                 print("마나가 부족합니다"); // UI 패널로 고치기
-                return;
             }
         }
     }
 
     private void UseWeapon()
     {
-        if ( shootingOn == true && FireSkillRunning == false && WaterSkillRunning == false && ElecSkillRunning == false)
+        if ( shootingOn == true && AnySkillRunning == false)
         {
             if (_mana > 0)
             {
                 ShootingOn?.Invoke();
                 ShootBullet();
-                Mana -= 1;
+                Mana -= 2;
             }
             else
             {
@@ -161,13 +186,13 @@ public class Weapon : MonoBehaviour
             }
             shootingOn = false;
         }
-        else if(shootingOn == true && FireSkillRunning == true || WaterSkillRunning == true || ElecSkillRunning == true)
+        else if(shootingOn == true && AnySkillRunning == true)
         {
             print("스킬이 실행중입니다");
         }
     }
 
-    private void ShootBullet()
+    public void ShootBullet()
     {
         SpawnBullet(_muzzle.position, _muzzle.rotation , false);
     }

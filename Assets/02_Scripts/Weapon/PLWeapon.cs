@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,10 +19,9 @@ public class PLWeapon : MonoBehaviour
 
     public void Shooting()
     {
-        // ( 스킬 진행 중 확인 if문 추가 가능성 있음 -> Weapon에 추가하는쪽으로 )
         if(_isReloading == true)
         {
-            _weapon.PlayCannotSound();
+            print("마나를 채우고 있습니다"); // UI로 고치기 
             return;
         }
         _weapon.TryShooting();
@@ -33,7 +31,7 @@ public class PLWeapon : MonoBehaviour
     {
         if(_isReloading == true)
         {
-            _weapon.PlayCannotSound();
+            print("마나를 채우고 있습니다"); // UI로 고치기 
             return;
         }
         _weapon.TryCharging();
@@ -73,11 +71,15 @@ public class PLWeapon : MonoBehaviour
 
     public void ReloadWeapon()
     {
-        if( _isReloading == false && totalMana > 0 && _weapon.ManaFull == false)
+        if( _isReloading == false && totalMana > 0 && _weapon.ManaFull == false && _weapon.AnySkillRunning == false)
         {
             _isReloading = true;
             _weapon.StopShooting();
             StartCoroutine(ReloadAmmo());
+        }
+        else if(_isReloading == false && totalMana > 0 && _weapon.ManaFull == false && _weapon.AnySkillRunning == true)
+        {
+            print("스킬이 사용중입니다."); // UI 패널로 고치기
         }
     }
 

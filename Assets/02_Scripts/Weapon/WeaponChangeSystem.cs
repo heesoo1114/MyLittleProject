@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,6 +6,7 @@ public class WeaponChangeSystem : MonoBehaviour
     public WeaponDataSO _fireWeaponData;
     public WeaponDataSO _waterWeaponData;
     public WeaponDataSO _elecWeaponData;
+    public WeaponDataSO _iceWeaponData;
 
     public UnityEvent ToFireWeaponData;
     public UnityEvent ToWaterWeaponData;
@@ -85,7 +84,7 @@ public class WeaponChangeSystem : MonoBehaviour
         NowWater = false;
     }
 
-    private void ToWaterWeapon()
+    public void ToWaterWeapon()
     {
         _weaponData = _waterWeaponData;
         _spriteRenderer.sprite = _weaponData.weaponSprite;
@@ -101,5 +100,14 @@ public class WeaponChangeSystem : MonoBehaviour
         NowElec = true;
         NowWater = false;
         NowFire = false;
+    }
+
+    public void ToIceWeapon()
+    {
+        _weaponData = _iceWeaponData;
+    }
+    public void ResetToWaterWeapon()
+    {
+        _weaponData = _waterWeaponData;
     }
 }
