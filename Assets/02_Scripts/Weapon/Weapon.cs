@@ -13,8 +13,8 @@ public class Weapon : MonoBehaviour
     // public UnityEvent ShootingOff;
 
     [SerializeField] protected WeaponDataSO _weaponData;
-    public WeaponDataSO WeaponData 
-    { 
+    public WeaponDataSO WeaponData
+    {
         get => _weaponData;
         set => _weaponData = value;
     }
@@ -51,6 +51,7 @@ public class Weapon : MonoBehaviour
     public UnityEvent ChangeWeaponQ;
     public UnityEvent ChangeWeaponE;
 
+    #region ChargingSkill 관련 로직
     // ChargingSkill 관련 
     [HideInInspector]
     public bool ChargingOn = false;
@@ -63,6 +64,11 @@ public class Weapon : MonoBehaviour
     public bool IsWaterOn = false;
     public bool IsElecOn = false;
 
+    // 스킬 사용중인지 확인
+    public bool FireSkillRunning = false;
+    public bool WaterSkillRunning = false;
+    public bool ElecSkillRunning = false;
+    #endregion
     private void Awake()
     {
         _wcy = transform.parent.parent.GetComponentInChildren<WeaponChangeSystem>();
@@ -104,31 +110,34 @@ public class Weapon : MonoBehaviour
                 {
                     NowFireState?.Invoke();
                     Mana -= 20;
-                    IsFireOn = false;
                 }
                 else if (_wcy.NowElec == true && IsElecOn == true)
                 {
                     NowElecState?.Invoke();
                     Mana -= 20;
-                    IsElecOn = false;
                 }
                 else if(_wcy.NowWater == true && IsWaterOn == true)
                 {
                     NowWaterState?.Invoke();
                     Mana -= 20;
-                    IsWaterOn = false;
                 }
                 else
                 {
-                    ChargingOn = false;
-                    PlayCannotSound();
-                    return;
+                    StopCharging();
+                    if(FireSkillRunning == true || ElecSkillRunning == true || WaterSkillRunning == true)
+                    {
+                        
+                    }
+                    else if(FireSkillRunning == false || ElecSkillRunning == false || WaterSkillRunning == false)
+                    {
+                        print("스킬을 사용할 수 없습니다"); // UI 패널로 고치기
+                    }
                 }
             }
             else
             {
                 ChargingOn = false;
-                PlayCannotSound();
+                print("마나가 부족합니다"); // UI 패널로 고치기
                 return;
             }
         }
@@ -136,7 +145,7 @@ public class Weapon : MonoBehaviour
 
     private void UseWeapon()
     {
-        if ( shootingOn == true && ChargingOn == false)
+        if ( shootingOn == true && FireSkillRunning == false && WaterSkillRunning == false && ElecSkillRunning == false)
         {
             if (_mana > 0)
             {
@@ -151,6 +160,10 @@ public class Weapon : MonoBehaviour
                 return;
             }
             shootingOn = false;
+        }
+        else if(shootingOn == true && FireSkillRunning == true || WaterSkillRunning == true || ElecSkillRunning == true)
+        {
+            print("스킬이 실행중입니다");
         }
     }
 

@@ -44,7 +44,6 @@ public class WeaponChangeSystemUI : MonoBehaviour
 
     public void OnWaterWeaponUI()
     {
-        print("111");
         _waterWeapon.color = Color.blue;
         _waterWeaponImage.color = Color.blue;
     }

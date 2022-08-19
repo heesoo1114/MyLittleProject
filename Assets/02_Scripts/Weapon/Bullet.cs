@@ -42,7 +42,7 @@ public class Bullet : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Obstacle"))
         {
-            Destroy(gameObject); // 나중에 풀링으로 변경ㄷ
+            Destroy(gameObject); // 나중에 풀링으로 변경
         }
     }
 
