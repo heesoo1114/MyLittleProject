@@ -7,7 +7,9 @@ public class ManaUI : MonoBehaviour
 {
     public GameObject magicwand;
     private Weapon _weapon;
+
     private Slider _manaSlider;
+    public Text _manaText;
 
     private void Awake()
     {
@@ -15,8 +17,10 @@ public class ManaUI : MonoBehaviour
         _manaSlider = GetComponent<Slider>();   
     }
 
-    private void Update()
+    public void Update()
     {
         _manaSlider.value = _weapon.Mana;
+        string stringMana = _weapon.Mana.ToString();
+        _manaText.text = stringMana;
     }
 }

@@ -53,25 +53,39 @@ public class WeaponChangeSystem : MonoBehaviour
 
     public void PressQ()
     {
-        if ( NowFire == true )
+        if(_weapon.AnySkillRunning == false)
         {
-            ToElecWeapon();
+            if (NowFire == true)
+            {
+                ToElecWeapon();
+            }
+            else if (NowWater == true)
+            {
+                ToFireWeapon();
+            }
         }
-        else if ( NowWater == true )
+        else
         {
-            ToFireWeapon();
+            print("스킬을 사용하고 있습니다."); // UI로 고치기
         }
     }
 
     public void PressE()
     {
-        if ( NowFire == true)
+        if (_weapon.AnySkillRunning == false)
         {
-            ToWaterWeapon();
+            if (NowFire == true)
+            {
+                ToWaterWeapon();
+            }
+            else if (NowElec == true)
+            {
+                ToFireWeapon();
+            }
         }
-        else if ( NowElec == true )
+        else
         {
-            ToFireWeapon();
+            print("스킬을 사용하고 있습니다."); // UI로 고치기
         }
     }
 

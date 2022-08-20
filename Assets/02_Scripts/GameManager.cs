@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private Texture2D _cursorSprite = null;
+
+    private void Start()
     {
-        
+        SetCursorSprite();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SetCursorSprite()
     {
-        
+        Cursor.SetCursor(_cursorSprite, new Vector2(_cursorSprite.width / 2f, _cursorSprite.height / 2f), (CursorMode.ForceSoftware));
     }
 }

@@ -27,6 +27,6 @@ public class CameraRaycast : MonoBehaviour
     {
         MousePosition = Input.mousePosition;
         TranPosition = Camera.main.ScreenToWorldPoint(MousePosition);
-        CreatePosition = new Vector3(TranPosition.x, TranPosition.y + 0.6f, 0);
+        CreatePosition = new Vector3(TranPosition.x, TranPosition.y + 1.8f, 0);
     }
 }

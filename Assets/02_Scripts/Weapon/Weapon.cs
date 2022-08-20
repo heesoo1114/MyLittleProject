@@ -26,7 +26,7 @@ public class Weapon : MonoBehaviour
     #endregion
 
     #region Mana 관련 로직
-    public UnityEvent<int> OnAmmoChange; // 총알 변경시 발생할 이벤트
+    public UnityEvent OnManaChange; // 총알 변경시 발생할 이벤트
     [SerializeField] protected int _mana; // 현재 마나 수
 
     public int Mana
@@ -35,7 +35,7 @@ public class Weapon : MonoBehaviour
         set
         {
             _mana = Mathf.Clamp(value, 0, _weaponData.manaAmount);
-            OnAmmoChange?.Invoke(_mana);
+            OnManaChange?.Invoke();
         }
     }
 
