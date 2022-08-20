@@ -5,6 +5,13 @@ using UnityEngine.Events;
 
 public class ChargingSkillSystem : MonoBehaviour
 {
+    // ThunderEffect 생성 지점
+    private Vector3 _position;
+    private Vector3 Position 
+    { get => _position; set => _position = value; }
+
+    public Camera _camera;
+    private CameraRaycast _cameraRaycast;
     private Weapon _weapon;
     private WeaponChangeSystem _wcy;
     public GameObject OsccUI;
@@ -21,15 +28,17 @@ public class ChargingSkillSystem : MonoBehaviour
     // public WeaponDataSO IceWandData;
     // private Icicle _icicle;
     public GameObject ThunderPrefab;
-    // private Thunder _thunder;
+    private Thunder _thunder;
 
     private void Awake()
     {
+        _cameraRaycast = _camera.GetComponent<CameraRaycast>();
         _weapon = transform.parent.GetComponent<Weapon>();
         _wcy = transform.parent.parent.parent.GetComponentInChildren<WeaponChangeSystem>();
         _osccUI = OsccUI.GetComponent<OnSkillChargingCheckUI>();
 
         _fireCircle = fireCirclePrefab.GetComponent<FireCircle>();
+        _thunder = ThunderPrefab.GetComponent<Thunder>();
     }
 
     public void NormalShootCount()
@@ -92,7 +101,6 @@ public class ChargingSkillSystem : MonoBehaviour
     // charchingOn = false; 를 스킬 feedback이 전부 끝났을 때 실행하게 해야 함
     public void FireCircle()
     {
-        print("fireSkill");
         fireShootCount = 0; // 중요 이거 안 해두면 IsFowerOn이 무한으로 돌아서 스킬이 마나가 없을때까지 돌아감
         _weapon.FireSkillRunning = true;
         StartCoroutine(FireCircleCreate());   
@@ -108,16 +116,33 @@ public class ChargingSkillSystem : MonoBehaviour
         _weapon.FireSkillRunning = false;
     }
 
-    public void Thunder()
+    public void Thunder() // ButtonPress
     {
-        print("elecSkill");
-        _weapon.ChargingOn = false;
+        _weapon.ElecSkillRunning = true;
+    }
+
+    public void TunderEffectCreate() // ButtonRealease
+    {
+        _cameraRaycast.CalMpToCp();
+        _position = _cameraRaycast.CreatePosition;
+        StartCoroutine(ThunderCreate(_position));
         elecShootCount = 0;
+    }
+
+    IEnumerator ThunderCreate(Vector3 ps)
+    {
+        Vector3 position = ps;
+        GameObject thunder = Instantiate(ThunderPrefab, position, Quaternion.identity);
+        _thunder._onThunder = true; // 천둥 치고 있는지 확인
+        yield return new WaitForSeconds(_thunder.delayTime);
+        Destroy(thunder); // 풀링으로 변경
+        _weapon.ChargingOn = false;
+        _weapon.ElecSkillRunning= false;
+        _thunder._onThunder = false; // 천둥 치고 있는지 확인
     }
 
     public void Icicle()
     {
-        print("waterSkill");
         waterShootCount = 0;
         _weapon.WaterSkillRunning = true;
         StartCoroutine(ChangeIceFromWater());

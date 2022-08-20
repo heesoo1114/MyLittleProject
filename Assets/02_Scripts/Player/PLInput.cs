@@ -14,6 +14,13 @@ public class PLInput : MonoBehaviour
     public UnityEvent ChargingButtonRealease;
     public UnityEvent ReloadButtonPress;
 
+    private Weapon _weapon;
+
+    private void Awake()
+    {
+        _weapon = GetComponentInChildren<Weapon>();
+    }
+
     private void Update()
     {
         GetMovementInput();
@@ -29,9 +36,9 @@ public class PLInput : MonoBehaviour
         {
             ChargingButtonPress?.Invoke();
         }
-        else
+        else if (Input.GetButtonUp("Fire2") && _weapon.ElecSkillRunning == true && _weapon.IsElecOn == true)
         {
-            ChargingButtonRealease?.Invoke();
+             ChargingButtonRealease?.Invoke();
         }
     }
 

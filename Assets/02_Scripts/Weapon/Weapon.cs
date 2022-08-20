@@ -176,7 +176,7 @@ public class Weapon : MonoBehaviour
             {
                 ShootingOn?.Invoke();
                 ShootBullet();
-                Mana -= 2;
+                Mana -= 1;
             }
             else
             {

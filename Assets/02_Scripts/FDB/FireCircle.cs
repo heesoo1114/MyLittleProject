@@ -7,7 +7,7 @@ public class FireCircle : MonoBehaviour
 {
     private GameObject Player;
     [HideInInspector] public Transform PlayerPosition;
-    public int damage = 3;
+    public float damage = 3;
     public float delayTime = 5.5f;
 
     private void Awake()
