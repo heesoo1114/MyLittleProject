@@ -85,12 +85,17 @@ public class PLWeapon : MonoBehaviour
 
     IEnumerator ReloadAmmo()
     {
-        yield return new WaitForSeconds(_weapon.WeaponData.reloadDelay);
+        // yield return new WaitForSeconds(_weapon.WeaponData.reloadDelay);
 
         _weapon.PlayReloadSound();
         int reloadMana = Mathf.Min(totalMana, _weapon.EmptyManaCnt);
         totalMana -= reloadMana;
-        _weapon.Mana += reloadMana;
+        // _weapon.Mana += reloadMana;
+        for(int i = 0; i < reloadMana; i++)
+        {
+            _weapon.Mana += 1;
+            yield return new WaitForSeconds(0.1f);
+        }
         totalMana += 100;
         _isReloading = false;
     }
