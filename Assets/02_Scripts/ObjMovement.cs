@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class ObjMovement : MonoBehaviour
 {
     [SerializeField]
-    private MovementDataSO _movementSO;
+    public MovementDataSO _movementSO;
 
     private Rigidbody2D _rigidbody;
 
@@ -15,9 +15,21 @@ public class ObjMovement : MonoBehaviour
 
     public UnityEvent<float> OnVelocityChange;
 
+    [HideInInspector] public float _objSpeed;
+    private float ObjSpeed
+    {
+        get => _objSpeed;
+        set => _objSpeed = value;
+    }
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        _objSpeed = _movementSO.maxSpeed;
     }
 
     public void MoveAgent(Vector2 moveInput)
@@ -48,7 +60,7 @@ public class ObjMovement : MonoBehaviour
             _currentVelocity -= _movementSO.deAcceleration * Time.deltaTime;
         }
 
-        return Mathf.Clamp(_currentVelocity, 0, _movementSO.maxSpeed);
+        return Mathf.Clamp(_currentVelocity, 0, ObjSpeed);
     }
 
     private void FixedUpdate()

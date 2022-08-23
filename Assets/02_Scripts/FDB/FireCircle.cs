@@ -13,7 +13,6 @@ public class FireCircle : MonoBehaviour
     private void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
-        // PlayerPosition = Player.GetComponent<Transform>();
     }
 
     private void Update()

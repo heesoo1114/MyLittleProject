@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAudio : MonoBehaviour
+public class EnemyAudio : AudioPlayer
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public AudioClip _deathClip;
 
-    // Update is called once per frame
-    void Update()
+    public void DieClip()
     {
-        
+        PlayClip(_deathClip);
     }
 }

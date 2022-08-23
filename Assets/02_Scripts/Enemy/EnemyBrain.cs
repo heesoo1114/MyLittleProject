@@ -38,7 +38,14 @@ public class EnemyBrain : MonoBehaviour
 
     public void TryAttack()
     {
-        FireButtonPress?.Invoke();
+        if (GameManager.Instance.PlayerHp._isDead == false)
+        {
+            FireButtonPress?.Invoke();
+        }
+        else
+        {
+            StopAttack();
+        }
     }
 
     public void StopAttack()

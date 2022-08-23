@@ -23,9 +23,30 @@ public class GameManager : MonoBehaviour
         get => _playerHp;
     }
 
+    [HideInInspector] public Weapon _weapon;
+    public Weapon Weapon
+    {
+        get => _weapon;
+    }
+
+    public GameObject ThunderPrefabs;
+
+    [HideInInspector] public Thunder _thunder;
+    public Thunder Thunder
+    {
+        get => _thunder;
+    }
+
+    public GameObject CssFDB;
+    [HideInInspector] public ChargingSkillSystem _chargingSkillSystem;
+    public ChargingSkillSystem ChargingSkillSystem => _chargingSkillSystem;
+
     private void Awake()
     {
         _playerHp = Player.GetComponent<PlayerHp>();
+        _weapon = Player.transform.Find("Weapon").GetComponentInChildren<Weapon>();
+        _thunder = ThunderPrefabs.GetComponent<Thunder>();
+        _chargingSkillSystem = CssFDB.GetComponent<ChargingSkillSystem>();
 
         if (Instance != null)
         {

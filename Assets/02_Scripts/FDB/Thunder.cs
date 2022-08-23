@@ -15,5 +15,10 @@ public class Thunder : MonoBehaviour
     }// 이걸로 천둥 치고 있는지 확인
 
     [HideInInspector] public Animator _anim;
-    [HideInInspector] public Vector3 createPosition;
+    private Vector3 _createPosition;
+    [HideInInspector] public Vector3 CreatePosition
+    {
+        get => _createPosition;
+        set => _createPosition = value;
+    }
 }

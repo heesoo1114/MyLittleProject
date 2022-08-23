@@ -10,9 +10,24 @@ public class EnemyAnimation : MonoBehaviour
     protected readonly int _deathHash = Animator.StringToHash("isDeath");
     protected readonly int _attakHash = Animator.StringToHash("Attack");
 
+    private SpriteRenderer _spriteRenderer;
+
     protected virtual void Awake()
     {
         _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void GetHitColorChanged()
+    {
+        _spriteRenderer.color = Color.black;
+        StartCoroutine(ColorReset());
+    }
+
+    IEnumerator ColorReset()
+    {
+        yield return new WaitForSeconds(0.07f);
+        _spriteRenderer.color = Color.white;
     }
 
     public void WalkAnimation(bool value)

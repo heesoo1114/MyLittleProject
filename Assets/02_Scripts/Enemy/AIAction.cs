@@ -27,8 +27,16 @@ public class AIAction : MonoBehaviour
 
         if (hit && IsHit == true)
         {
+            if (GameManager.Instance._playerHp.Health <= 0)
+            {
+                GameManager.Instance._playerHp._isDead = true;
+                GameManager.Instance._playerHp.DieEvent?.Invoke();
+                _brain.FireButtonRealease?.Invoke();
+                return;
+            }
             print("hit");
             GameManager.Instance._playerHp.Health -= _damage;
+            GameManager.Instance._playerHp.GetHitEvent?.Invoke();
             StartCoroutine(UpdateHp());
         }
         else

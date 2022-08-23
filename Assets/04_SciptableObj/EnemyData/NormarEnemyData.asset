@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NormarEnemyData
   m_EditorClassIdentifier: 
   enemyName: NormalEnemy
-  prefab: {fileID: 0}
+  prefab: {fileID: 6669950463826857078, guid: ea3c8361f67e4d749aa125816519ec83, type: 3}
   maxHealth: 10
   knockbackRegist: 1
   damage: 5

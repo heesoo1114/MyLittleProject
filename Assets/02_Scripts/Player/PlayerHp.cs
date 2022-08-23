@@ -5,9 +5,13 @@ using UnityEngine.Events;
 
 public class PlayerHp : MonoBehaviour
 {
+    public UnityEvent DieEvent;
+    public UnityEvent DieOver1fEvent;
+    public UnityEvent GetHitEvent;
+
     public bool IsEnemy => false;
 
-    private bool _isDead = false;
+    public bool _isDead = false;
 
     #region 체력관련 부분
     [SerializeField]
@@ -28,4 +32,18 @@ public class PlayerHp : MonoBehaviour
         _health = _maxHealth;
     }
 
+    public void DelayInvoke()
+    {
+        Invoke("DieOverEventInvoke", 0.6f);
+    }
+
+    public void DieOverEventInvoke()
+    {
+        DieOver1fEvent?.Invoke();
+    }
+
+    public void ConTimeScale()
+    {
+        Time.timeScale = 0;
+    }
 }

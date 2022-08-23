@@ -9,9 +9,24 @@ public class PLAnimation : MonoBehaviour
     protected readonly int _walkHash = Animator.StringToHash("Walk");
     protected readonly int _deathHash = Animator.StringToHash("Death");
 
+    private SpriteRenderer _spriteRenderer;
+
     protected virtual void Awake()
     {
         _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void GetHitColor()
+    {
+        _spriteRenderer.color = Color.red;
+        StartCoroutine(ColorReset());
+    }
+
+    IEnumerator ColorReset()
+    {
+        yield return new WaitForSeconds(0.7f);
+        _spriteRenderer.color = Color.white;
     }
 
     public void WalkAnimation(bool value)

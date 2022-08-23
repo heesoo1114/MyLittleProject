@@ -44,6 +44,19 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject); // 나중에 풀링으로 변경
         }
+
+        /*if(collision.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject); // 나중에 풀링으로 변경
+            Enemy _enemy = collision.gameObject.GetComponentInParent<Enemy>();
+            _enemy.GetHit();
+            _enemy.enemyHealth -= BulletData.damage;
+        }*/
+    }
+
+    public void BulletDestory()
+    {
+        Destroy(gameObject);
     }
 
 }
