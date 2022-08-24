@@ -122,17 +122,16 @@ public class Enemy : MonoBehaviour
 
     public void HitFireSkill()
     {
-        print("firehit");
         _isDelayAttack = false;
         StartCoroutine(FireSkillHit());
     }
 
     IEnumerator FireSkillHit()
     {
-        for(int i = 0; i < 6; i++)
+        for(int i = 0; i < 5; i++)
         {
             GetHit();
-            EnemyHealth -= 1;
+            EnemyHealth -= 2;
 
             if (enemyHealth <= 0)
             {
@@ -147,7 +146,6 @@ public class Enemy : MonoBehaviour
 
     public void HitElecSkill()
     {
-        print("elechit");
         _isDelayAttack2 = false;
         StartCoroutine(ElecSkillHit());
     }
@@ -155,7 +153,7 @@ public class Enemy : MonoBehaviour
     IEnumerator ElecSkillHit()
     {
         GetHit();
-        enemyHealth -= 9;
+        enemyHealth -= 10;
         _movement._objSpeed = 0.5f; // ¸ÂÀº enemy speed ³·Ãè´Ù°¡ 
 
         if (enemyHealth <= 0)

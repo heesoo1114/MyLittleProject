@@ -34,7 +34,6 @@ public class AIAction : MonoBehaviour
                 _brain.FireButtonRealease?.Invoke();
                 return;
             }
-            print("hit");
             GameManager.Instance._playerHp.Health -= _damage;
             GameManager.Instance._playerHp.GetHitEvent?.Invoke();
             StartCoroutine(UpdateHp());

@@ -42,16 +42,24 @@ public class Bullet : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Obstacle"))
         {
-            Destroy(gameObject); // 나중에 풀링으로 변경
+            BulletDestory(); // 나중에 풀링으로 변경
         }
 
-        /*if(collision.gameObject.CompareTag("Enemy"))
+        if(collision.gameObject.CompareTag("Portal"))
         {
-            Destroy(gameObject); // 나중에 풀링으로 변경
-            Enemy _enemy = collision.gameObject.GetComponentInParent<Enemy>();
-            _enemy.GetHit();
-            _enemy.enemyHealth -= BulletData.damage;
-        }*/
+            EnemySpawner _enemySpawner = collision.gameObject.GetComponent<EnemySpawner>();
+            if(_enemySpawner.SpawnerCanDie == true)
+            {
+                BulletDestory();
+                _enemySpawner.PortalHealth -= 2;
+                _enemySpawner.GetHit();
+
+                if(_enemySpawner.PortalHealth <= 0)
+                {
+                    _enemySpawner.PortalDie?.Invoke();
+                }
+            }
+        }
     }
 
     public void BulletDestory()

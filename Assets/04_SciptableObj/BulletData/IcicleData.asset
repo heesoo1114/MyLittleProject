@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IcicleData
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4178632755189200033, guid: 3b97d95d1b2207d429242391c6585b85, type: 3}
-  damage: 5
+  damage: 10
   bulletSpeed: 15
   impactObstacle: {fileID: 0}
   impactEnemy: {fileID: 0}
