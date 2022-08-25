@@ -141,21 +141,21 @@ public class Weapon : MonoBehaviour
                     else if (_wcy.NowFire == true && IsFireOn == false && FireSkillRunning == false)
                     {
                         StopCharging();
-                        print("스킬을 사용할 수 없습니다"); // UI로 고치기
+                        UIManager.Instance.CantUseSkillNotice?.Invoke();
                     }
                     else if (_wcy.NowElec == true && IsElecOn == false && ElecSkillRunning == false)
                     {
                         StopCharging();
-                        print("스킬을 사용할 수 없습니다"); // UI로 고치기
+                        UIManager.Instance.CantUseSkillNotice?.Invoke();
                     }
                     else if (_wcy.NowWater == true && IsWaterOn == false && WaterSkillRunning == false)
                     {
                         StopCharging();
-                        print("스킬을 사용할 수 없습니다"); // UI로 고치기
+                        UIManager.Instance.CantUseSkillNotice?.Invoke();
                     }
                     else if (AnySkillRunning == true)
                     {
-                        print("스킬을 사용하고 있습니다"); // UI로 고치기
+                        UIManager.Instance.UsingSkillNotice?.Invoke();
                         return;
                     }
                 }
@@ -163,7 +163,7 @@ public class Weapon : MonoBehaviour
             else
             {
                 ChargingOn = false;
-                print("마나가 부족합니다"); // UI 패널로 고치기
+                UIManager.Instance.NoManaNotice?.Invoke();
             }
         }
     }
@@ -188,7 +188,7 @@ public class Weapon : MonoBehaviour
         }
         else if(shootingOn == true && AnySkillRunning == true)
         {
-            print("스킬이 실행중입니다");
+            UIManager.Instance.UsingSkillNotice?.Invoke();
         }
     }
 
@@ -199,7 +199,8 @@ public class Weapon : MonoBehaviour
 
     private void SpawnBullet(Vector3 position, Quaternion rot, bool isEnemyBullet)
     {
-        Bullet bullet = Instantiate(_weaponData.bulletData.bulletPrefab).GetComponent<Bullet>(); // 풀링으로 변경
+        // Bullet bullet = Instantiate(_weaponData.bulletData.bulletPrefab).GetComponent<Bullet>(); // 풀링으로 변경
+        Bullet bullet = PoolManager.Instance.Pop(_weaponData.bulletData.bulletPrefab.name) as Bullet;
         bullet.SetPositionAndRotation(position, rot);
         bullet.IsEnemy = isEnemyBullet;
         bullet.BulletData = _weaponData.bulletData;

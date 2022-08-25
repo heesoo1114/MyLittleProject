@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : PoolAbleMono
 {
     protected Rigidbody2D _rigidbody;
     protected float _timeToLive;
@@ -25,6 +25,8 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+
+        Init();
     }
 
     public void SetPositionAndRotation(Vector3 position, Quaternion rot)
@@ -42,7 +44,7 @@ public class Bullet : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Obstacle"))
         {
-            BulletDestory(); // 나중에 풀링으로 변경
+            BulletDestory();
         }
 
         if(collision.gameObject.CompareTag("Portal"))
@@ -57,6 +59,7 @@ public class Bullet : MonoBehaviour
                 if(_enemySpawner.PortalHealth <= 0)
                 {
                     _enemySpawner.PortalDie?.Invoke();
+                    _enemySpawner.SpawnerDie = true;
                 }
             }
         }
@@ -64,7 +67,12 @@ public class Bullet : MonoBehaviour
 
     public void BulletDestory()
     {
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        PoolManager.Instance.Push(this);
     }
 
+    public override void Init()
+    {
+        // nothing
+    }
 }

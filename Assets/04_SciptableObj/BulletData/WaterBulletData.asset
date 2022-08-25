@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WaterBulletData
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 403214935428398569, guid: 028fb1548c53e3b40a109d7146c2f9a0, type: 3}
-  damage: 1
+  damage: 3
   bulletSpeed: 10
   impactObstacle: {fileID: 0}
   impactEnemy: {fileID: 0}

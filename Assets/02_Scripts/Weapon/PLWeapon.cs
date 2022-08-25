@@ -21,7 +21,7 @@ public class PLWeapon : MonoBehaviour
     {
         if(_isReloading == true)
         {
-            print("마나를 채우고 있습니다"); // UI로 고치기 
+            UIManager.Instance.ManaChargingNotice?.Invoke();
             return;
         }
         _weapon.TryShooting();
@@ -31,7 +31,7 @@ public class PLWeapon : MonoBehaviour
     {
         if(_isReloading == true)
         {
-            print("마나를 채우고 있습니다"); // UI로 고치기 
+            UIManager.Instance.ManaChargingNotice?.Invoke();
             return;
         }
         _weapon.TryCharging();
@@ -79,7 +79,7 @@ public class PLWeapon : MonoBehaviour
         }
         else if(_isReloading == false && totalMana > 0 && _weapon.ManaFull == false && _weapon.AnySkillRunning == true)
         {
-            print("스킬이 사용중입니다."); // UI 패널로 고치기
+            UIManager.Instance.UsingSkillNotice?.Invoke();
         }
     }
 

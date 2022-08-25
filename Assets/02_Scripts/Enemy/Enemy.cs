@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Enemy : MonoBehaviour
+public class Enemy : PoolAbleMono
 {
     public UnityEvent EnemyDieEvent;
     public UnityEvent EnemyGetHitEvent;
@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
     {
         _brain = GetComponent<EnemyBrain>();
         _movement = GetComponent<ObjMovement>();
+
+        Init();
     }
 
     private void Start()
@@ -52,7 +54,8 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject); // 나중에 풀링으로 변경
+        // Destroy(gameObject); // 나중에 풀링으로 변경
+        PoolManager.Instance.Push(this);
     }
 
     public void OnEnemyDie()
@@ -69,6 +72,8 @@ public class Enemy : MonoBehaviour
             Bullet _bullet = collision.gameObject.GetComponent<Bullet>();
             _bullet.BulletDestory();
             enemyHealth -= _bullet.BulletData.damage;
+            GameManager.Instance._playerHp.PlayerVampire(_bullet.BulletData.damage);
+            UIManager.Instance.ShowingDamagePopUp?.Invoke(_bullet.BulletData.damage, transform);
 
             if (enemyHealth <= 0)
             {
@@ -83,6 +88,8 @@ public class Enemy : MonoBehaviour
             Bullet _bullet = collision.gameObject.GetComponent<Bullet>();
             _bullet.BulletDestory();
             enemyHealth -= _bullet.BulletData.damage;
+            GameManager.Instance._playerHp.PlayerVampire(_bullet.BulletData.damage);
+            UIManager.Instance.ShowingDamageCreate(_bullet.BulletData.damage, transform);
 
             // icicle 맞았을 때 즉시 멈추고 아무 행동을 하지 못 함
             _movement.StopImmediatelly();
@@ -112,7 +119,7 @@ public class Enemy : MonoBehaviour
             {
                 float distance = Vector2.Distance(_brain.BasePosition.position, GameManager.Instance.ChargingSkillSystem._position);
 
-                if(distance < 3.3 && _isDelayAttack2 == true)
+                if(distance < 2.5 && _isDelayAttack2 == true)
                 {
                     HitElecSkill();
                 }
@@ -132,6 +139,8 @@ public class Enemy : MonoBehaviour
         {
             GetHit();
             EnemyHealth -= 2;
+            GameManager.Instance._playerHp.PlayerVampire(2);
+            UIManager.Instance.ShowingDamageCreate(2, transform);
 
             if (enemyHealth <= 0)
             {
@@ -153,7 +162,9 @@ public class Enemy : MonoBehaviour
     IEnumerator ElecSkillHit()
     {
         GetHit();
-        enemyHealth -= 10;
+        enemyHealth -= 7;
+        GameManager.Instance._playerHp.PlayerVampire(8);
+        UIManager.Instance.ShowingDamageCreate(7, transform);
         _movement._objSpeed = 0.5f; // 맞은 enemy speed 낮췄다가 
 
         if (enemyHealth <= 0)
@@ -165,5 +176,10 @@ public class Enemy : MonoBehaviour
         _isDelayAttack2 = true;
         _movement._objSpeed = _movement._movementSO.maxSpeed; // 4초 뒤에 다시 원상복귀 
         StopCoroutine(ElecSkillHit());
+    }
+
+    public override void Init()
+    {
+        
     }
 }

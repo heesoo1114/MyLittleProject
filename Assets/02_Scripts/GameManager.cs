@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance = null;
 
     [SerializeField]
+    private PoolingListSO _poolingList = null;
+
+    [SerializeField]
     private Texture2D _cursorSprite = null;
 
     public GameObject Player;
@@ -54,7 +57,18 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
 
+        PoolManager.Instance = new PoolManager(transform);
+        CreatePool();
+
         SetCursorSprite();
+    }
+
+    private void CreatePool()
+    {
+        foreach (PoolingPair pp in _poolingList.list)
+        {
+            PoolManager.Instance.CreatePool(pp.prefab, pp.poolCount);
+        }
     }
 
     private void SetCursorSprite()

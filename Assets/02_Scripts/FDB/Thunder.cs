@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Thunder : MonoBehaviour
+public class Thunder : PoolAbleMono
 {
     public float damage = 10f;
     public float delayTime = 2f;
@@ -20,5 +20,15 @@ public class Thunder : MonoBehaviour
     {
         get => _createPosition;
         set => _createPosition = value;
+    }
+
+    private void Awake()
+    {
+        Init();
+    }
+
+    public override void Init()
+    {
+        
     }
 }

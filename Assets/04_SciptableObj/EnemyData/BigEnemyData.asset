@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: BigEnemy
   prefab: {fileID: 2952899539619640989, guid: 0cd871ac571c50e49b7f92638255fe0f, type: 3}
-  maxHealth: 30
+  maxHealth: 24
   knockbackRegist: 1
   damage: 20
   attackDelay: 2
   attackRange: 2
-  canAttackRange: 3
+  canAttackRange: 2.3

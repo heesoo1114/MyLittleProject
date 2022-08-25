@@ -46,4 +46,12 @@ public class PlayerHp : MonoBehaviour
     {
         Time.timeScale = 0;
     }
+
+    public void PlayerVampire(int vamHp)
+    {
+        if(_health <= _maxHealth)
+        {
+            _health += vamHp;
+        }
+    }
 }

@@ -109,9 +109,12 @@ public class ChargingSkillSystem : MonoBehaviour
     IEnumerator FireCircleCreate()
     {
         Vector3 CreatePosition = new Vector3(0, 0, 0);
-        GameObject fireCircle = Instantiate(fireCirclePrefab, CreatePosition, Quaternion.identity); // 풀링으로 변경
+        // GameObject fireCircle = Instantiate(fireCirclePrefab, CreatePosition, Quaternion.identity); // 풀링으로 변경
+        FireCircle fireCircle = PoolManager.Instance.Pop(fireCirclePrefab.name) as FireCircle;
+        fireCircle.transform.SetPositionAndRotation(CreatePosition, Quaternion.identity);
         yield return new WaitForSeconds(_fireCircle.delayTime);
-        Destroy(fireCircle);  // 풀링으로 변경
+        // Destroy(fireCircle);  // 풀링으로 변경
+        PoolManager.Instance.Push(fireCircle);
         _weapon.ChargingOn = false;
         _weapon.FireSkillRunning = false;
     }
@@ -132,12 +135,14 @@ public class ChargingSkillSystem : MonoBehaviour
     IEnumerator ThunderCreate(Vector3 ps)
     {
         Vector3 position = ps;
-        GameObject thunder = Instantiate(ThunderPrefab, position, Quaternion.identity); // 풀링으로 변경
+        // GameObject thunder = Instantiate(ThunderPrefab, position, Quaternion.identity); // 풀링으로 변경
+        Thunder thunder = PoolManager.Instance.Pop(ThunderPrefab.name) as Thunder;
         _thunder._onThunder = true; 
 
         yield return new WaitForSeconds(_thunder.delayTime);
 
-        Destroy(thunder); // 풀링으로 변경
+        // Destroy(thunder); // 풀링으로 변경
+        PoolManager.Instance.Push(thunder);
         _weapon.ChargingOn = false;
         _weapon.ElecSkillRunning= false;
         _thunder._onThunder = false; 

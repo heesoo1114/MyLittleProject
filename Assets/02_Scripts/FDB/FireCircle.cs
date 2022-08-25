@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireCircle : MonoBehaviour
+public class FireCircle : PoolAbleMono
 {
     private GameObject Player;
     [HideInInspector] public Transform PlayerPosition;
@@ -13,10 +13,16 @@ public class FireCircle : MonoBehaviour
     private void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+        Init();
     }
 
     private void Update()
     {
         transform.position = Player.transform.position;
+    }
+
+    public override void Init()
+    {
+        
     }
 }
