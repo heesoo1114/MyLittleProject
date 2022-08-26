@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -14,16 +13,52 @@ public class UIManager : MonoBehaviour
     public UnityEvent CantUseSkillNotice;
     public UnityEvent UsingSkillNotice;
 
+    public UnityEvent InGameESC;
+
     public UnityEvent<int, Transform> ShowingDamagePopUp;
 
     public GameObject NoticePanelPrefab;
     private Vector3 CreatePoint;
 
     public GameObject PopUpTextPrefab;
+    public bool isOn = true;
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            InGameESC?.Invoke();
+        }
+    }
+
+    public void PanelDownAnim(GameObject panel)
+    {
+        Sequence sequence = DOTween.Sequence()
+            .Append(panel.transform.DOMoveY(transform.position.y, 0.6f))
+            .OnComplete(() =>
+            {
+                Time.timeScale = 0;
+            });
+    }
+
+    public void EscUI(GameObject ui)
+    {
+        ui.SetActive(isOn);
+        if (isOn == true)
+        {
+            Time.timeScale = 0;
+        }
+        else if (isOn == false)
+        {
+            Time.timeScale = 1;
+        }
+        isOn = !isOn;
+
     }
 
     public void NoticePanelCreate(string str)
@@ -44,5 +79,4 @@ public class UIManager : MonoBehaviour
         PopUPDamageUI damageText = PoolManager.Instance.Pop(PopUpTextPrefab.name) as PopUPDamageUI;
         damageText.transform.SetPositionAndRotation(createPosition, Quaternion.identity);
     }
-    //GameObject.Find("Canvas").transform
 }

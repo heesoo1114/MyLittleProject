@@ -34,7 +34,7 @@ public class PlayerHp : MonoBehaviour
 
     public void DelayInvoke()
     {
-        Invoke("DieOverEventInvoke", 0.6f);
+        Invoke("DieOverEventInvoke", 1f);
     }
 
     public void DieOverEventInvoke()

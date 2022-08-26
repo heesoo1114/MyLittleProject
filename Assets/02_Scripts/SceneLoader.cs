@@ -14,4 +14,9 @@ public class SceneLoader : MonoBehaviour
     {
         LoadingSceneManager.LoadScene("Play");
     }
+
+    public void ToExit()
+    {
+        Application.Quit();
+    }
 }

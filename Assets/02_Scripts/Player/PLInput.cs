@@ -52,13 +52,16 @@ public class PLInput : MonoBehaviour
 
     private void GetShootingInput()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(UIManager.Instance.isOn == true)
         {
-            ShootingButtonPress?.Invoke();
-        }
-        else
-        {
-            ShootingButtonRealease?.Invoke();
+            if (Input.GetButtonDown("Fire1"))
+            {
+                ShootingButtonPress?.Invoke();
+            }
+            else
+            {
+                ShootingButtonRealease?.Invoke();
+            }
         }
     }
 

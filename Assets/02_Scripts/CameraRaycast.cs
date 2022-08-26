@@ -11,6 +11,11 @@ public class CameraRaycast : MonoBehaviour
     [HideInInspector] public Vector3 CursorPosition;
     [HideInInspector] public Vector3 Trans2Position;
 
+    private void Awake()
+    {
+        Time.timeScale = 1;
+    }
+
     private void Update()
     {
         MpToCp();
