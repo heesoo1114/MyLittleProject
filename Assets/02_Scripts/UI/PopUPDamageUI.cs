@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
@@ -6,6 +5,7 @@ using TMPro;
 public class PopUPDamageUI : PoolAbleMono
 {
     private TMPro.TextMeshPro _textMeshPro;
+    Sequence mySequence;
 
     private void Awake()
     {
@@ -14,27 +14,18 @@ public class PopUPDamageUI : PoolAbleMono
 
     private void Start()
     {
-        Sequence mySequence = DOTween.Sequence()
-        .Append(transform.DOMoveY(transform.position.y + 0.5f, 1f, false))
-        .OnStart(() =>
-        {
-            StartCoroutine(FadeIn());
-        })
-        .OnComplete(() =>
-        {
-            DestoryUI();
-        });
+        mySequence = DOTween.Sequence()
+            .SetAutoKill(false)
+            .Append(transform.DOMoveY(transform.position.y + 0.7f, 0.7f, false))
+            .OnComplete(() =>
+            {
+                DestoryUI();
+            });
     }
 
-    private IEnumerator FadeIn()
+    void OnEnable()
     {
-        Color color = _textMeshPro.color;
-        while (color.a > 0f)
-        {
-            yield return new WaitForSeconds(0.001f);
-            color.a -= Time.deltaTime / 1f;
-            _textMeshPro.color = color;
-        }
+        mySequence.Restart();
     }
 
     private void DestoryUI()
@@ -45,6 +36,6 @@ public class PopUPDamageUI : PoolAbleMono
 
     public override void Init()
     {
-
+        _textMeshPro.text = UIManager.Instance.a.ToString();
     }
 }

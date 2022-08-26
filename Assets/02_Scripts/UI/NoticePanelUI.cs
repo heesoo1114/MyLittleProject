@@ -22,8 +22,8 @@ public class NoticePanelUI : PoolAbleMono
 
     public void DestroyUI()
     {
-        // Destroy(gameObject); // 풀링으로 변경
-        PoolManager.Instance.Push(this);
+        Destroy(gameObject); // 풀링으로 변경
+        // PoolManager.Instance.Push(this);
     }
 
     public IEnumerator FadeIn()

@@ -137,6 +137,7 @@ public class ChargingSkillSystem : MonoBehaviour
         Vector3 position = ps;
         // GameObject thunder = Instantiate(ThunderPrefab, position, Quaternion.identity); // 풀링으로 변경
         Thunder thunder = PoolManager.Instance.Pop(ThunderPrefab.name) as Thunder;
+        thunder.transform.SetPositionAndRotation(position, Quaternion.identity);
         _thunder._onThunder = true; 
 
         yield return new WaitForSeconds(_thunder.delayTime);

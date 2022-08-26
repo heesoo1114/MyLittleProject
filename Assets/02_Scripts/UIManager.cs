@@ -23,6 +23,8 @@ public class UIManager : MonoBehaviour
     public GameObject PopUpTextPrefab;
     public bool isOn = true;
 
+    public int a;
+
     private void Awake()
     {
         Instance = this;
@@ -39,7 +41,7 @@ public class UIManager : MonoBehaviour
     public void PanelDownAnim(GameObject panel)
     {
         Sequence sequence = DOTween.Sequence()
-            .Append(panel.transform.DOMoveY(transform.position.y, 0.6f))
+            .Append(panel.transform.DOMoveY(transform.position.y, 0.5f))
             .OnComplete(() =>
             {
                 Time.timeScale = 0;
@@ -64,19 +66,19 @@ public class UIManager : MonoBehaviour
     public void NoticePanelCreate(string str)
     {
         NoticePanelPrefab.GetComponentInChildren<Text>().text = str;
-        // Instantiate(NoticePanelPrefab, CreatePoint, Quaternion.identity, GameObject.Find("InGameNotice").transform);
+        Instantiate(NoticePanelPrefab, CreatePoint, Quaternion.identity, GameObject.Find("InGameNotice").transform);
         // 풀링으로 변경
-        NoticePanelUI noticePanel = PoolManager.Instance.Pop(NoticePanelPrefab.name) as NoticePanelUI;
-        noticePanel.transform.SetPositionAndRotation(CreatePoint, Quaternion.identity);
+        /*NoticePanelUI noticePanel = PoolManager.Instance.Pop(NoticePanelPrefab.name) as NoticePanelUI;
+        noticePanel.transform.SetPositionAndRotation(CreatePoint, Quaternion.identity);*/
     }
 
     public void ShowingDamageCreate(int damage, Transform postion)
     {
-        PopUpTextPrefab.GetComponent<TextMeshPro>().text = damage.ToString();
-        Vector3 createPosition = new Vector3(postion.position.x, postion.position.y - 0.8f, 0);
+        a = damage;
+        Vector3 createPosition = new Vector3(postion.position.x, postion.position.y - 2f, 0);
         // Instantiate(PopUpTextPrefab, createPosition, Quaternion.identity); 
         // 풀링으로 변경
-        PopUPDamageUI damageText = PoolManager.Instance.Pop(PopUpTextPrefab.name) as PopUPDamageUI;
+        PopUPDamageUI damageText = PoolManager.Instance.Pop(PopUpTextPrefab.name) as PopUPDamageUI; 
         damageText.transform.SetPositionAndRotation(createPosition, Quaternion.identity);
     }
 }

@@ -42,5 +42,4 @@ public class PoolManager
         item.Init(); // 초기화 해주고
         return item;
     }
-
 }
