@@ -76,7 +76,7 @@ public class Enemy : PoolAbleMono
             _bullet.BulletDestory();
             enemyHealth -= _bullet.BulletData.damage;
             GameManager.Instance._playerHp.PlayerVampire(_bullet.BulletData.damage);
-            UIManager.Instance.ShowingDamagePopUp?.Invoke(_bullet.BulletData.damage, _brain.BasePosition.transform);
+            UIManager.Instance.ShowingDamagePopUp?.Invoke(_bullet.BulletData.damage, _brain.UIPosition.transform);
 
             if (enemyHealth <= 0)
             {
@@ -92,7 +92,7 @@ public class Enemy : PoolAbleMono
             _bullet.BulletDestory();
             enemyHealth -= _bullet.BulletData.damage;
             GameManager.Instance._playerHp.PlayerVampire(_bullet.BulletData.damage);
-            UIManager.Instance.ShowingDamagePopUp?.Invoke(_bullet.BulletData.damage, _brain.BasePosition.transform);
+            UIManager.Instance.ShowingDamagePopUp?.Invoke(_bullet.BulletData.damage, _brain.UIPosition.transform);
 
             // icicle 맞았을 때 즉시 멈추고 아무 행동을 하지 못 함
             _movement.StopImmediatelly();
@@ -143,7 +143,7 @@ public class Enemy : PoolAbleMono
             GetHit();
             EnemyHealth -= 2;
             GameManager.Instance._playerHp.PlayerVampire(2);
-            UIManager.Instance.ShowingDamagePopUp?.Invoke(2, _brain.BasePosition.transform);
+            UIManager.Instance.ShowingDamagePopUp?.Invoke(2, _brain.UIPosition.transform);
 
             if (enemyHealth <= 0)
             {
@@ -167,7 +167,7 @@ public class Enemy : PoolAbleMono
         GetHit();
         enemyHealth -= 7;
         GameManager.Instance._playerHp.PlayerVampire(8);
-        UIManager.Instance.ShowingDamagePopUp?.Invoke(7, _brain.BasePosition.transform);
+        UIManager.Instance.ShowingDamagePopUp?.Invoke(7, _brain.UIPosition.transform);
         _movement._objSpeed = 0.5f; // 맞은 enemy speed 낮췄다가 
 
         if (enemyHealth <= 0)

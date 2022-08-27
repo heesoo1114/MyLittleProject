@@ -24,6 +24,8 @@ public class EnemyBrain : MonoBehaviour
 
     [SerializeField] private Transform _basePosition;
     public Transform BasePosition { get => _basePosition; }
+    [SerializeField] private Transform _uiPosition;
+    public Transform UIPosition { get => _uiPosition; }
 
     private void Start()
     {

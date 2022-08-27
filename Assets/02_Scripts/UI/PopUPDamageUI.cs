@@ -16,7 +16,7 @@ public class PopUPDamageUI : PoolAbleMono
     {
         mySequence = DOTween.Sequence()
             .SetAutoKill(false)
-            .Append(transform.DOMoveY(transform.position.y + 0.7f, 0.7f, false))
+            .Append(transform.DOMoveY(transform.position.y, 0.7f, false))
             .OnComplete(() =>
             {
                 DestoryUI();
@@ -30,7 +30,6 @@ public class PopUPDamageUI : PoolAbleMono
 
     private void DestoryUI()
     {
-        // Destroy(gameObject); // 풀링으로 변경
         PoolManager.Instance.Push(this);
     }
 

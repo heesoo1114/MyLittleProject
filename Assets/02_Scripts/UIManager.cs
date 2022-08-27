@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     public bool isOn = true;
 
     public int a;
+    public Vector3 b;
 
     private void Awake()
     {
@@ -54,13 +55,29 @@ public class UIManager : MonoBehaviour
         if (isOn == true)
         {
             Time.timeScale = 0;
+            isOn = !isOn;
         }
         else if (isOn == false)
         {
             Time.timeScale = 1;
+            isOn = !isOn;
         }
-        isOn = !isOn;
+        // isOn = !isOn;
+    }
 
+    public void BackUI(GameObject ui)
+    {
+        if (isOn == true)
+        {
+            Time.timeScale = 0;
+            isOn = !isOn;
+        }
+        else if (isOn == false)
+        {
+            Time.timeScale = 1;
+            isOn = !isOn;
+        }
+        // isOn = !isOn;
     }
 
     public void NoticePanelCreate(string str)
@@ -75,10 +92,12 @@ public class UIManager : MonoBehaviour
     public void ShowingDamageCreate(int damage, Transform postion)
     {
         a = damage;
+        b = postion.position;
         Vector3 createPosition = new Vector3(postion.position.x, postion.position.y - 2f, 0);
         // Instantiate(PopUpTextPrefab, createPosition, Quaternion.identity); 
         // 풀링으로 변경
         PopUPDamageUI damageText = PoolManager.Instance.Pop(PopUpTextPrefab.name) as PopUPDamageUI; 
         damageText.transform.SetPositionAndRotation(createPosition, Quaternion.identity);
+        print(createPosition);
     }
 }
