@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    private void Awake()
+    {
+        Time.timeScale = 1.0f;
+    }
+
     public void ToMain()
     {
         LoadingSceneManager.LoadScene("Main");

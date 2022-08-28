@@ -98,6 +98,5 @@ public class UIManager : MonoBehaviour
         // 풀링으로 변경
         PopUPDamageUI damageText = PoolManager.Instance.Pop(PopUpTextPrefab.name) as PopUPDamageUI; 
         damageText.transform.SetPositionAndRotation(createPosition, Quaternion.identity);
-        print(createPosition);
     }
 }
