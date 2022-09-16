@@ -23,6 +23,6 @@ public class WarColorChange : MonoBehaviour
     public void AllColorReset(GameObject war)
     {
         SpriteRenderer spriteRenderer = war.GetComponent<SpriteRenderer>();
-        spriteRenderer.color = Color.green;
+        spriteRenderer.color = Color.blue;
     }
 }

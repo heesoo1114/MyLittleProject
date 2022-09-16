@@ -250,6 +250,24 @@ public class GameManager : MonoBehaviour
         BreakTime?.Invoke();
         isTimerOn = false;
         Score += 10;
+        if(Score >= 0 && Score < 300)
+        {
+            obstacleManager.isFirst = true;
+            obstacleManager.isSecond = false;
+            obstacleManager.isThird = false;
+        }
+        else if (Score >= 300 && Score < 800)
+        {
+            obstacleManager.isSecond = true;
+            obstacleManager.isFirst = false;
+            obstacleManager.isThird = false;
+        }
+        else if (Score >= 800)
+        {
+            obstacleManager.isFirst = false;
+            obstacleManager.isSecond = false;
+            obstacleManager.isThird = true;
+        }
         SetTime = 5;
         obstacleManager.Reduce();
         IsTimeReset();
@@ -262,10 +280,28 @@ public class GameManager : MonoBehaviour
     {
         BreakTime?.Invoke();
         isTimerOn = false;
-        Score -= 5;
-        if(Score <= 0)
+        Score -= 50;
+        if(Score < 0)
         {
             GameOverEvent?.Invoke();
+        }
+        else if (Score >= 0 && Score < 300)
+        {
+            obstacleManager.isFirst = true;
+            obstacleManager.isSecond = false;
+            obstacleManager.isThird = false;
+        }
+        else if (Score >= 300 && Score < 800)
+        {
+            obstacleManager.isSecond = true;
+            obstacleManager.isFirst = false;
+            obstacleManager.isThird = false;
+        }
+        else if (Score >= 800)
+        {
+            obstacleManager.isFirst = false;
+            obstacleManager.isSecond = false;
+            obstacleManager.isThird = true;
         }
         SetTime = 5;
         obstacleManager.Reduce();
