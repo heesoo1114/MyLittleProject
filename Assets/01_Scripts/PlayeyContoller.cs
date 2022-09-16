@@ -23,11 +23,12 @@ public class PlayeyContoller : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-    }
 
-    private void OnEnable()
-    {
+        isLeft = false;
+        isRight = false;
+        isUp = false;
         isDown = true;
+
         canJump = false;
         isJumping = false;
     }

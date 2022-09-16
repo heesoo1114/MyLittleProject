@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
         instance = this;
         obstacleManager = obsm.GetComponent<ObstacleManager>();
     }
@@ -93,6 +94,11 @@ public class GameManager : MonoBehaviour
             }
             SetTime -= Time.deltaTime;
         }
+    }
+
+    public void TimeControll()
+    {
+        Time.timeScale = 0;
     }
 
     private void WhereIGo() // 어디로 가야하나
@@ -268,7 +274,19 @@ public class GameManager : MonoBehaviour
             obstacleManager.isSecond = false;
             obstacleManager.isThird = true;
         }
-        SetTime = 5;
+
+        if(obstacleManager.isFirst)
+        {
+            SetTime = 7;
+        }
+        else if(obstacleManager.isSecond)
+        {
+            SetTime = 6;
+        }
+        else if(obstacleManager.isThird)
+        {
+            SetTime = 5;
+        }
         obstacleManager.Reduce();
         IsTimeReset();
         // CollisionReset();
@@ -277,6 +295,11 @@ public class GameManager : MonoBehaviour
     }
 
     private void Defeat()
+    {
+        GameOverEvent?.Invoke();
+    }
+
+    /*private void Defeat()
     {
         BreakTime?.Invoke();
         isTimerOn = false;
@@ -309,5 +332,5 @@ public class GameManager : MonoBehaviour
         // CollisionReset();
         // 다시 확률 돌림
         Invoke("WhereIGo", 1f);
-    }
+    }*/
 }
