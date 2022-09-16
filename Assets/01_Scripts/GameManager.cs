@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject obsm;
+    ObstacleManager obstacleManager;
+
     public static GameManager instance;
     public float SetTime;
     
@@ -27,11 +30,21 @@ public class GameManager : MonoBehaviour
     public UnityEvent IsLeftUI;
     public UnityEvent IsDownUI;
     public UnityEvent IsUpUI;
-    
-    void Start()
+
+    public UnityEvent BreakTime;
+
+    public UnityEvent GameOverEvent;
+
+    private void Awake()
     {
         instance = this;
-        WhereIGo();
+        obstacleManager = obsm.GetComponent<ObstacleManager>();
+    }
+
+    void Start()
+    {
+        // instance = this;
+        Invoke("WhereIGo", 1f);
     }
 
     void Update()
@@ -86,6 +99,8 @@ public class GameManager : MonoBehaviour
     {
         // CollisionReset();
         IsTimeReset();
+        Obstacle.isDieTime = false;
+        obstacleManager.Spawn();
 
         switch(WherePercentManager())
         {
@@ -145,10 +160,10 @@ public class GameManager : MonoBehaviour
             // CollisionReset();
             isTimerOn = true;
             isUpTime = true;
+            IsUpUI?.Invoke();
 
             if (isTimerOn == false)
             {
-                print("Defeat");
                 Defeat();
             }
         }
@@ -169,10 +184,10 @@ public class GameManager : MonoBehaviour
 
             isTimerOn = true;
             isLeftTime = true;
+            IsLeftUI?.Invoke();
 
             if (isTimerOn == false)
             {
-                print("Defeat");
                 Defeat();
             }
         }
@@ -193,10 +208,10 @@ public class GameManager : MonoBehaviour
 
             isTimerOn = true;
             isRightTime = true;
+            IsRightUI?.Invoke();
 
             if (isTimerOn == false)
             {
-                print("Defeat");
                 Defeat();
             }
         }
@@ -217,10 +232,10 @@ public class GameManager : MonoBehaviour
 
             isTimerOn = true;
             isDownTime = true;
+            IsDownUI?.Invoke();
 
             if (isTimerOn == false)
             {
-                print("Defeat");
                 Defeat();
             }
         }
@@ -232,25 +247,31 @@ public class GameManager : MonoBehaviour
 
     private void Win()
     {
-        print("Win");
+        BreakTime?.Invoke();
         isTimerOn = false;
         Score += 10;
         SetTime = 5;
+        obstacleManager.Reduce();
         IsTimeReset();
         // CollisionReset();
         // 다시 확률 돌림
-        Invoke("WhereIGo", 0.7f);
+        Invoke("WhereIGo", 1f);
     }
 
     private void Defeat()
     {
-        print("Defeat");
+        BreakTime?.Invoke();
         isTimerOn = false;
         Score -= 5;
+        if(Score <= 0)
+        {
+            GameOverEvent?.Invoke();
+        }
         SetTime = 5;
+        obstacleManager.Reduce();
         IsTimeReset();
         // CollisionReset();
         // 다시 확률 돌림
-        Invoke("WhereIGo", 0.7f);
+        Invoke("WhereIGo", 1f);
     }
 }

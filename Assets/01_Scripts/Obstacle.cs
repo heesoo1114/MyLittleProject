@@ -16,6 +16,8 @@ public class Obstacle : MonoBehaviour
     [SerializeField]
     public Direction direction = Direction.Right;
 
+    public static bool isDieTime = false;
+
     private void Start()
     {
         if(gameObject.activeSelf)
@@ -42,5 +44,18 @@ public class Obstacle : MonoBehaviour
                 transform.DOMoveY(a, 1f);
             }
         }
+    }
+
+    private void Update()
+    {
+        if(isDieTime)
+        {
+            ObstacleReduce();
+        }
+    }
+
+    private void ObstacleReduce()
+    {
+        Destroy(gameObject);
     }
 }

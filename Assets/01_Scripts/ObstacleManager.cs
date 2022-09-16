@@ -25,18 +25,11 @@ public class ObstacleManager : MonoBehaviour
 
     private int a;
 
+    public GameObject[] prefab;
+
     private void Start()
     {
-        /*Obstacle obstacle = gameObject.GetComponent<Obstacle>();
-        obstacle.direction = Direction.Down;*/
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Spawn();
-        }
+        
     }
 
     public void Spawn()
@@ -44,6 +37,11 @@ public class ObstacleManager : MonoBehaviour
         SpawnUDManager();
         SpawnLRManager();
         SpawnWhatPrefab(); 
+    }
+
+    public void Reduce()
+    {
+        Obstacle.isDieTime = true;
     }
 
     private int SpawnWhatPrefab()
@@ -267,7 +265,6 @@ public class ObstacleManager : MonoBehaviour
     
     private void SingleUDSpawn()
     {
-        print("SingleSPawn");
         // 랜덤 위치 -6 부터 10까지
         if(!PlayeyContoller.isDown) // 다운에 있을 때 다운스폰 ㄴㄴ
         {
@@ -281,7 +278,6 @@ public class ObstacleManager : MonoBehaviour
 
     private void SingleLRSpawn()
     {
-        print("SingleSPawnlr");
         // 랜덤 위치 -6 부터 10까지
         if(!PlayeyContoller.isLeft)
         {
@@ -295,7 +291,6 @@ public class ObstacleManager : MonoBehaviour
 
     private void DoubleUDSpawn()
     {
-        print("DoubleSpawn");
         for (int i = 0; i < DownSpawnPosition.Length; i++)
         {
             if (i == 1 || i == 3)
@@ -314,7 +309,6 @@ public class ObstacleManager : MonoBehaviour
 
     private void DoubleLRSpawn()
     {
-        print("DoubleSpawnlr");
         for (int i = 0; i < DownSpawnPosition.Length; i++)
         {
             if (i == 0 || i == 2)
@@ -333,7 +327,6 @@ public class ObstacleManager : MonoBehaviour
 
     private void TripleUDSpawn()
     {
-        print("TripleSpawn");
         for(int i = 0; i < DownSpawnPosition.Length; i++)
         {
             if(i == 0 || i == 2 || i == 4)

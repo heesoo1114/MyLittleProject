@@ -210,54 +210,45 @@ public class PlayeyContoller : MonoBehaviour
 
         if(collision.gameObject.layer == LayerMask.NameToLayer("Left"))
         {
-            print("left");
             GameManager.instance.CollisionToLeft = true;
         }
         else if (collision.gameObject.layer != LayerMask.NameToLayer("Left"))
         {
-            print("leftOut");
             GameManager.instance.CollisionToLeft = false;
         }
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Right"))
         {
-            print("right");
             GameManager.instance.CollisionToRight = true;
         }
         else if (collision.gameObject.layer != LayerMask.NameToLayer("Right"))
         {
-            print("rightOut");
             GameManager.instance.CollisionToRight = false;
         }
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Down"))
         {
-            print("down");
             GameManager.instance.CollisionToDown = true;
         }
         else if (collision.gameObject.layer != LayerMask.NameToLayer("Down"))
         {
-            print("downOut");
             GameManager.instance.CollisionToDown = false;
         }
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Up"))
         {
-            print("up");
             GameManager.instance.CollisionToUp = true;
         }
         else if (collision.gameObject.layer != LayerMask.NameToLayer("Up"))
         {
-            print("upOut");
             GameManager.instance.CollisionToUp = false;
         }
     }
 
     
 
-    private void Die()
+    public void Die()
     {
-        print("Game Over");
-        gameObject.SetActive(false);
+        GameManager.instance.GameOverEvent?.Invoke();
     }
 }
