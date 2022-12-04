@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    PlayerController _playerController;
     Camera _cam;
+
+    PlayerController _playerController;
+    GunController _gunController;
 
     [SerializeField] private LayerMask layermask; // Ground만 설정하여 mousePosition
 
     public float moveSpeed = 5f;
 
-    private void Start()
+    private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
+        _gunController = GetComponentInChildren<GunController>();
         _cam = Camera.main;
     }
 
     private void Update()
     {
-        PlayerMove();
+        GetMoveInput();
         GetMouseInput();
+        GetFireInput();
+    }
+
+    private void GetFireInput()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _gunController.FireBullet(); 
+        }
     }
 
     private void GetMouseInput()
@@ -31,10 +43,11 @@ public class Player : MonoBehaviour
         {
             Vector3 point = raycastHit.point;
             _playerController.LookAt(point);
+            // Debug.DrawLine(ray.origin, point);
         }
     }
 
-    private void PlayerMove()
+    private void GetMoveInput()
     {
         float xInput = Input.GetAxisRaw("Horizontal");
         float zInput = Input.GetAxisRaw("Vertical");

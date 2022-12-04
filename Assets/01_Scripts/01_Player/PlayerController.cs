@@ -8,9 +8,14 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 velocity;
 
-    private void Start()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+    }
+    private void FixedUpdate()
+    {
+        // MovePosition(현재 위치 + 이동할 속력 + 단위시간)
+        _rigidbody.MovePosition(_rigidbody.position + velocity * Time.fixedDeltaTime);
     }
 
     public void Move(Vector3 getVelocity)
@@ -20,13 +25,7 @@ public class PlayerController : MonoBehaviour
 
     public void LookAt(Vector3 lookPoint)
     {
-        Vector3 heightCorrectPoint = new Vector3(lookPoint.x, transform.position.y, lookPoint.z);
+        Vector3 heightCorrectPoint = new(lookPoint.x, transform.position.y, lookPoint.z);
         transform.LookAt(heightCorrectPoint);
-    }
-
-    private void FixedUpdate()
-    {
-        // MovePosition(현재 위치 + 이동할 속력 + 단위시간)
-        _rigidbody.MovePosition(_rigidbody.position + velocity * Time.fixedDeltaTime);
     }
 }
