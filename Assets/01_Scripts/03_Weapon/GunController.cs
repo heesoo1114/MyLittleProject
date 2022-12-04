@@ -14,7 +14,8 @@ public class GunController : MonoBehaviour
 
     public void FireBullet()
     {
-        Bullet newBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
-        newBullet.SetSpeed(muzzleVelocity);
+        // Bullet newBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
+        Bullet newBullet = PoolManager.Instance.Pop(bullet.name) as Bullet;
+        newBullet.SetProperties(muzzleVelocity, muzzle.rotation, muzzle.transform);
     }
 }

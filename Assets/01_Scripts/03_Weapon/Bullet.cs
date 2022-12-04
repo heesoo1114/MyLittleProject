@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : PoolAbleMono
 {
     public float bulletSpeed = 5f;
 
@@ -17,15 +17,20 @@ public class Bullet : MonoBehaviour
         transform.Translate(bulletSpeed * Time.deltaTime * Vector3.forward);
     }
 
-    public void SetSpeed(float newSpeed)
+    public void SetProperties(float newSpeed, Quaternion newRot, Transform newPosition)
     {
         bulletSpeed = newSpeed;
+        transform.rotation = newRot;
+        transform.position = newPosition.position;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);
-        Destroy(collision.gameObject);
-        Debug.Log("Collision");
+        PoolManager.Instance.Push(this);
+    }
+
+    public override void Init()
+    {
+        // not thing
     }
 }
