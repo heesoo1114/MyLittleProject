@@ -26,7 +26,13 @@ public class Bullet : PoolAbleMono
 
     private void OnCollisionEnter(Collision collision)
     {
+        // 어딘가에 부딪혔을 때 총알 삭제
         PoolManager.Instance.Push(this);
+
+        if (collision.gameObject.CompareTag("Enemy")) // 적에 충돌했을 때
+        {
+            Destroy(collision.gameObject); // 적 삭제
+        }
     }
 
     public override void Init()

@@ -28,4 +28,12 @@ public class PlayerController : MonoBehaviour
         Vector3 heightCorrectPoint = new(lookPoint.x, transform.position.y, lookPoint.z);
         transform.LookAt(heightCorrectPoint);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            print("isWall");
+        }
+    }
 }
