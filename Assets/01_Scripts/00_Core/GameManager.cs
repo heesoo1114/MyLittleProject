@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private PoolingListSO _poolingList = null;
 
+    public Transform player;
+
     private void Awake()
     {
         if (Instance != null)
