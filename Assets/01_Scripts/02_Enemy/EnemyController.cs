@@ -10,6 +10,17 @@ public class EnemyController : MonoBehaviour
 
     // 에이전트의 목적지
     private Transform target;
+    public Transform Target
+    {
+        get => target;
+        set => target = value;
+    }
+
+    [SerializeField] private Transform basePosition;
+    public Transform BasePosition
+    {
+        get => basePosition;
+    }
 
     private void Awake()
     {
@@ -23,11 +34,6 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // 에이전트에게 목적지를 알려주는 함수
-            _navMeshAgent.SetDestination(target.position);
-        }*/
         if (target != null)
         {
             _navMeshAgent.SetDestination(target.position);

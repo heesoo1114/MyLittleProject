@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class EnemyAIBrain : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    EnemyController _enemyController;
+
+    [SerializeField] private AIState currentState;
+
+    private void Awake()
     {
-        
+        _enemyController = transform.parent.GetComponent<EnemyController>();   
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        currentState.UpdateState();
+    }
+
+    public void ChangeState(AIState state)
+    {
+        currentState = state;
     }
 }

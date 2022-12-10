@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIAct : MonoBehaviour
+public abstract class AIAct : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    protected EnemyAIBrain _brain;
+    protected EnemyController _enemyController;
+
+    protected virtual void Awake()
     {
-        
+        _brain = transform.parent.GetComponent<EnemyAIBrain>();
+        _enemyController = transform.parent.parent.GetComponent<EnemyController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void PlayAct();
 }
