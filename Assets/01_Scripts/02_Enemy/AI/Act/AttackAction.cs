@@ -7,5 +7,6 @@ public class AttackAction : AIAct
     public override void PlayAct()
     {
         Debug.Log("AttackAction");
+        _gunController.FireBullet();
     }
 }

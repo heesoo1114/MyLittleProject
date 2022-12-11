@@ -41,6 +41,10 @@ public class EnemyController : MonoBehaviour
         {
             _navMeshAgent.SetDestination(target.position);
         }
+        else
+        {
+            EnemyStop();
+        }
     }
 
     public void EnemyStop()
