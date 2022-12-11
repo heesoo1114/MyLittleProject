@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9434b0ac45b254889e1b813681f6dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distance: 7.9
+  _distance: 5
 --- !u!1 &84824179
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b12dc4f9dc482e04cae7e43b62b741f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _navMeshAgent: {fileID: 0}
   basePosition: {fileID: 769318689}
 --- !u!114 &769318691
 MonoBehaviour:
@@ -1810,7 +1811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9434b0ac45b254889e1b813681f6dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distance: 4
+  _distance: 3.5
 --- !u!114 &1731938002
 MonoBehaviour:
   m_ObjectHideFlags: 0

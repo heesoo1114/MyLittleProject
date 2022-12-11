@@ -6,7 +6,10 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     // 길을 찾아서 이동할 에이전트
-    NavMeshAgent _navMeshAgent;
+    [HideInInspector] public NavMeshAgent _navMeshAgent;
+
+    Rigidbody _rigidbody;
+    public Rigidbody Rigidbody => _rigidbody;
 
     // 에이전트의 목적지
     private Transform target;
@@ -25,6 +28,7 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Start()

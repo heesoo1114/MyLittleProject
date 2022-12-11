@@ -18,7 +18,6 @@ public class AIState : MonoBehaviour
 
     private void Awake()
     {
-        // _brain 가져오기
         _brain = transform.parent.GetComponent<EnemyAIBrain>();
     }
 
