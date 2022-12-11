@@ -5,14 +5,20 @@ using UnityEngine;
 public class AIState : MonoBehaviour 
 {
     private EnemyAIBrain _brain = null;
-
+    
+    [Header("Action")]
     [SerializeField]
     private List<AIAct> _acts = null;
+
+    // Decisions
+    [Header("Decision List")]
     [SerializeField]
-    private List<AIDecision> _decisions = null;
+    private List<AIDecision> _positiveDecisions = null;
+    [SerializeField]
+    private List<AIDecision> _negativeDecisions = null;
 
     // State Route
-    [Header("Route")]
+    [Header("Route State")]
     public AIState PositiveState;
     public AIState NegativeState;
 
@@ -30,24 +36,29 @@ public class AIState : MonoBehaviour
         }
 
         // State Route
-        bool result = false;
+        bool positive = false;
+        bool negative = false;
 
-        foreach (AIDecision decision in _decisions)
+        foreach (AIDecision decision in _positiveDecisions)
         {
-            result = decision.CheckDecision();
-            if (result == false) return;
+            positive = decision.CheckDecision();
+            if (positive == false) break;
+            _brain.ChangeState(PositiveState);
+            return;
+        }
+
+        foreach (AIDecision decision in _negativeDecisions)
+        {
+            negative = decision.CheckDecision();
+            if (negative == false) break;
+            _brain.ChangeState(NegativeState);
+            return;
         }
 
         // State Change
-        if (result == true)
+        /*if (positive == false && negative == false)
         {
-            if (PositiveState == null) return;
-            _brain.ChangeState(PositiveState);
-        }
-        else
-        {
-            if (NegativeState == null) return;
-            _brain.ChangeState(NegativeState);
-        }
+            print("Áß°£");
+        }*/
     }
 }

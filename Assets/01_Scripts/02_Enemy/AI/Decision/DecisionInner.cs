@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DecisionDistance : AIDecision
+public class DecisionInner : AIDecision
 {
     [SerializeField]
     [Range(0.1f, 30f)]
