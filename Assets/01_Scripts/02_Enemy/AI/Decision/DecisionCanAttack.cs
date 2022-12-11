@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DecisionOuter : AIDecision
+public class DecisionCanAttack : AIDecision
 {
     [SerializeField]
     [Range(0.1f, 30f)]
     private float _distance = 5f;
     public float Distance { get => _distance; set => _distance = Mathf.Clamp(value, 0.1f, 30f); }
 
+    RaycastHit hit;
+
     public override bool CheckDecision()
     {
-        if (_enemyController.Target == null) return false;
-        float calc = Vector3.Distance(_enemyController.Target.position, _enemyController.BasePosition.position);
-
-        if (calc > _distance) // 적이 시야거리내에  존재한다면
+        if (Physics.Raycast(_enemyController.BasePosition.position, _enemyController.BasePosition.forward, out hit, _distance))
         {
+            Debug.DrawRay(_enemyController.BasePosition.position, _enemyController.BasePosition.forward * hit.distance);
+            if (hit.collider.name != "Player") return false;
             return true;
         }
         else
@@ -24,15 +25,15 @@ public class DecisionOuter : AIDecision
         }
     }
 
-#if UNITY_EDITOR
+/*#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (UnityEditor.Selection.activeGameObject == gameObject)
         {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, _distance);
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(_enemyController.BasePosition.position, _enemyController.BasePosition.forward * hit.distance);
             Gizmos.color = Color.white;
         }
     }
-#endif
+#endif*/
 }

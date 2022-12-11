@@ -11,6 +11,7 @@ public class DecisionInner : AIDecision
 
     public override bool CheckDecision()
     {
+        if (_enemyController.Target == null) return false;
         float calc = Vector3.Distance(_enemyController.Target.position, _enemyController.BasePosition.position);
 
         if (calc < _distance) // 적이 시야거리내에  존재한다면
