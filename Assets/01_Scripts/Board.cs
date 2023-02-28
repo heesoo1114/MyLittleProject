@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 
@@ -10,6 +11,15 @@ public class Board : MonoBehaviour
     int[,] boardInfo = new int[10, 10];
 
     public int mineCount = 10; // 지뢰개수
+
+    public List<Sprite> spriteList;
+
+    private void Start()
+    {
+        InitBoard();
+        IntantiateBoard();
+        DebugBoardInfo();
+    }
 
     [ContextMenu("초기화")]
     public void InitBoard()
@@ -37,8 +47,6 @@ public class Board : MonoBehaviour
                 i++;
             }
         }
-
-        DebugBoardInfo();
 
         // 기본 땅 주변 지뢰 수 찾고 자신에게 숫자 부여
         int number = 0;
@@ -77,7 +85,12 @@ public class Board : MonoBehaviour
             for (int x = 0; x < 10; x++)
             {
                 GameObject block = Instantiate(blockPrefab, this.gameObject.transform);
-                block.name = "Block" + (y * 10 + (x + 1));
+                block.name = "Block" + (y * 10 + (x + 1)); // 블록 이름 
+                
+                Block _block = block.GetComponent<Block>();
+                
+                _block.blockID = boardInfo[y, x]; // 블록에 정보 넣어줌
+                _block.SetBlock();
             }
         }
     }
