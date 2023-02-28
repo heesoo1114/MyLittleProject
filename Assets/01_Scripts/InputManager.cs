@@ -26,8 +26,6 @@ public class InputManager : MonoBehaviour
 
             if (hit.collider != null)
             {
-                Debug.Log("open");
-
                 Block _block = hit.collider.gameObject.GetComponent<Block>();
 
                 if (_block.info == Info.Mine)
@@ -50,7 +48,6 @@ public class InputManager : MonoBehaviour
 
             if (hit.collider != null)
             {
-                Debug.Log("marking");
                 hit.collider.gameObject.GetComponent<Block>().MarkingBlock();
             }
         }

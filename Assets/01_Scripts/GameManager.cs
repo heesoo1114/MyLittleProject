@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,6 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     Board _board;
+
+    public bool isOver = false;
 
     // 시간 세는 기능 넣기
 
@@ -26,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _board.openCount = 0;
         _board.InitBoard();
         _board.InstantiateBoard();
     }
@@ -35,10 +39,12 @@ public class GameManager : MonoBehaviour
         _board.RemoveBoard();
         _board.InitBoard();
         _board.InstantiateBoard();
+        isOver = false;
     }
 
     public void GameOver()
     {
+        isOver = true;
         _board.OpenBoard();
     }
 

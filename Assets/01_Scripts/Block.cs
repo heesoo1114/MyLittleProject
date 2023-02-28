@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,21 +44,13 @@ public class Block : MonoBehaviour
     
     public void OpenBlock()
     {
-        // 0ÀÌ¸é ÁÖº¯ 8 ºí·Ï ¿ÀÇÂ
-        /*if (blockID == 0)
+        // 0ÀÌ¸é ÁÖº¯ 8°³ ºí·Ï ¿ÀÇÂ
+        if (blockID == 0)
         {
-            for (int i = y - 1; i <= y + 1; i++)
-            {
-                if (i < 0 || i > 9) continue; // ¸Ê ¹þ¾î³µÀ» ¶§
+            int number = int.Parse(this.gameObject.name);
 
-                for (int j = x - 1; j <= x + 1; j++)
-                {
-                    if (j < 0 || j > 9) continue; // ¸Ê ¹þ¾î³µÀ» ¶§
-
-                    
-                }
-            }
-        }*/
+            
+        }
 
         if (isOpen) return;
 
@@ -68,6 +58,13 @@ public class Block : MonoBehaviour
 
         _inImage.enabled = true;
         isOpen = true;
+
+        _board.openCount++;
+
+        if (GameManager.Instance.isOver == false && _board.openCount >= 100 - _board.mineCount)
+        {
+            Debug.Log("Å¬¸®¾î");
+        }
     }
 
     public void MarkingBlock()

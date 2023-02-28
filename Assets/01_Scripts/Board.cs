@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class Board : MonoBehaviour
@@ -11,6 +8,7 @@ public class Board : MonoBehaviour
     int[,] boardInfo = new int[10, 10];
 
     public int mineCount = 10; // 지뢰개수 0과 100 X
+    [HideInInspector] public int openCount = 0; // 게임 클리어를 위한 count
 
     public List<Sprite> spriteList;
 
@@ -76,7 +74,7 @@ public class Board : MonoBehaviour
             for (int x = 0; x < 10; x++)
             {
                 GameObject block = Instantiate(blockPrefab, this.gameObject.transform);
-                block.name = "Block" + (y * 10 + (x + 1)); // 블록 이름 
+                block.name = (y * 10 + (x + 1)).ToString(); // 블록 이름 
                 
                 Block _block = block.GetComponent<Block>();
                 
@@ -101,8 +99,6 @@ public class Board : MonoBehaviour
             this.transform.GetChild(i).gameObject.GetComponent<Block>().OpenBlock();
         }
     }
-
-    // 클리어 조건 체크
 
     public void DebugBoardInfo()
     {
