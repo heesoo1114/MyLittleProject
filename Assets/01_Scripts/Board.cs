@@ -10,18 +10,10 @@ public class Board : MonoBehaviour
 
     int[,] boardInfo = new int[10, 10];
 
-    public int mineCount = 10; // 지뢰개수
+    public int mineCount = 10; // 지뢰개수 0과 100 X
 
     public List<Sprite> spriteList;
 
-    private void Start()
-    {
-        InitBoard();
-        IntantiateBoard();
-        DebugBoardInfo();
-    }
-
-    [ContextMenu("초기화")]
     public void InitBoard()
     {
         // 2차원 배열 전부 0(기본 땅)으로 초기화
@@ -77,8 +69,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    [ContextMenu("생성")]
-    public void IntantiateBoard()
+    public void InstantiateBoard()
     {
         for (int y = 0; y < 10; y++)
         {
@@ -95,7 +86,24 @@ public class Board : MonoBehaviour
         }
     }
 
-    [ContextMenu("디버그")]
+    public void RemoveBoard()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            Destroy(this.transform.GetChild(i).gameObject);
+        }
+    }
+
+    public void OpenBoard()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            this.transform.GetChild(i).gameObject.GetComponent<Block>().OpenBlock();
+        }
+    }
+
+    // 클리어 조건 체크
+
     public void DebugBoardInfo()
     {
         for (int y = 0; y < 10; y++)
