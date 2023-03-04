@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Board : MonoBehaviour
@@ -8,7 +9,7 @@ public class Board : MonoBehaviour
     int[,] boardInfo = new int[10, 10];
 
     public int mineCount = 10; // 지뢰개수 0과 100 X
-    [HideInInspector] public int openCount = 0; // 게임 클리어를 위한 count
+    public int openCount = 0; // 게임 클리어를 위한 count
 
     public List<Sprite> spriteList;
 
@@ -77,7 +78,7 @@ public class Board : MonoBehaviour
                 block.name = (y * 10 + (x + 1)).ToString(); // 블록 이름 
                 
                 Block _block = block.GetComponent<Block>();
-                
+
                 _block.blockID = boardInfo[y, x]; // 블록에 정보 넣어줌
                 _block.SetBlock();
             }
@@ -98,6 +99,8 @@ public class Board : MonoBehaviour
         {
             this.transform.GetChild(i).gameObject.GetComponent<Block>().OpenBlock();
         }
+
+        GameManager.Instance.isOver = true;
     }
 
     public void DebugBoardInfo()

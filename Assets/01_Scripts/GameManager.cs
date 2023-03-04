@@ -32,10 +32,12 @@ public class GameManager : MonoBehaviour
         _board.openCount = 0;
         _board.InitBoard();
         _board.InstantiateBoard();
+        isOver = false;
     }
 
     public void NewGame()
     {
+        _board.openCount = 0;
         _board.RemoveBoard();
         _board.InitBoard();
         _board.InstantiateBoard();
@@ -55,5 +57,10 @@ public class GameManager : MonoBehaviour
 #else
         Application.Quit(); 
 #endif     
+    }
+
+    public void OnApplicationQuit()
+    {
+        Debug.Log("게임이 종료되었습니다.");
     }
 }

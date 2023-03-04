@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,7 @@ public class Block : MonoBehaviour
 
     public Info info = Info.Number;
     public int blockID; // -1 ~ 8
+
     public bool isOpen = false;
     public bool isMarking = false;
 
@@ -24,7 +26,11 @@ public class Block : MonoBehaviour
     {
         _board = transform.parent.GetComponent<Board>();
         _inImage = transform.GetChild(0).GetComponent<Image>();
-        spriteList = _board.spriteList;
+        
+        if (spriteList == null)
+        {
+            spriteList = _board.spriteList;
+        }
     }
 
     public void SetBlock()
@@ -41,17 +47,9 @@ public class Block : MonoBehaviour
         _inImage.enabled = false;
         _inImage.sprite = spriteList[blockID];
     }
-    
+
     public void OpenBlock()
     {
-        // 0이면 주변 8개 블록 오픈
-        if (blockID == 0)
-        {
-            int number = int.Parse(this.gameObject.name);
-
-            
-        }
-
         if (isOpen) return;
 
         if (isMarking) SetBlock();
@@ -71,6 +69,7 @@ public class Block : MonoBehaviour
     {
         if (isOpen) return;
 
+        // 마킹이 되어 있는 상태라면 블록을 다시 세팅해 주고 marking을 해제
         if (isMarking)
         {
             SetBlock();
