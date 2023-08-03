@@ -28,15 +28,18 @@ public class SpawnManager : MonoBehaviour
     public void NextWave(int enemyCount, float delayTime)
     {
         waveCount++;
-        StartCoroutine(Spawn(enemyCount, delayTime));
 
         if (waveCount > lastWave) 
         {
-            print("Clear all wave!");
+            WaveClear?.Invoke();
             SpawnStop();
         }
+        else
+        {
+            WaveChange?.Invoke(waveCount);
+        }
 
-        WaveChange?.Invoke(waveCount);
+        StartCoroutine(Spawn(enemyCount, delayTime));
     }
 
     IEnumerator Spawn(int enemyCount, float delayTime)
