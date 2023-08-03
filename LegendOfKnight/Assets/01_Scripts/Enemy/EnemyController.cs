@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyController : MonoBehaviour
 {
-    CapsuleCollider _collider;
     Rigidbody _rigidbody;
     Animator _anim;
 
@@ -15,10 +13,12 @@ public class EnemyController : MonoBehaviour
         set => target = value;
     }
 
-    // Move
+    [Header("MoveValue")]
     public float moveSpeed;
     Vector3 moveVelocity;
     public bool canChase = false; // 쫓아갈지말지
+
+    [SerializeField] UnityEvent DieEvent;
 
     private void Awake()
     {
@@ -47,7 +47,6 @@ public class EnemyController : MonoBehaviour
     private void LateUpdate()
     {
         _anim.SetFloat("Move", moveVelocity.magnitude);
-        // Debug.Log(moveVelocity.magnitude);
     }
 
     private void Move()
@@ -77,6 +76,7 @@ public class EnemyController : MonoBehaviour
     {
         _anim.SetTrigger("Dead");
         canChase = false;
+        DieEvent?.Invoke();
         Invoke("RemoveObj", 1f);
     }
 

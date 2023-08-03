@@ -25,11 +25,11 @@ public class Sword : MonoBehaviour
 
         isAttaking = true;
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.2f);
         _collider.enabled = true;
         _trailRenderer.enabled = true;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
         _collider.enabled = false;
         _trailRenderer.enabled = false;
 
@@ -40,7 +40,7 @@ public class Sword : MonoBehaviour
     {
         isAttaking = true;
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.6f);
         _collider.enabled = true;
         _trailRenderer.enabled = true;
 

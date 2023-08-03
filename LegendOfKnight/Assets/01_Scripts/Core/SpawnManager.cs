@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -54,7 +55,7 @@ public class SpawnManager : MonoBehaviour
             }
 
             yield return new WaitForSeconds(delayTime);
-            int randomPositionNumber = Random.Range(0, 4);
+            int randomPositionNumber = Random.Range(0, spawnPosition.Count);
             Instantiate(enemy, spawnPosition[randomPositionNumber].position, Quaternion.identity);
             spawnCount++;
         }
