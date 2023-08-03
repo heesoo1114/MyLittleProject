@@ -1,15 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    Camera cam;
-
-    private void Awake()
-    {
-        cam = FindObjectOfType<Camera>();
-    }
+    [SerializeField] private Camera cam;
 
     private void Update()
     {

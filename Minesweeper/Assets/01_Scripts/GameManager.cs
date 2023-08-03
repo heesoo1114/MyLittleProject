@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    Board _board;
+    [SerializeField] private Board _board;
 
     public bool isOver = false;
 
@@ -23,8 +20,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(Instance);
         }
-
-        _board = FindObjectOfType<Board>();
     }
 
     private void Start()
@@ -57,10 +52,5 @@ public class GameManager : MonoBehaviour
 #else
         Application.Quit(); 
 #endif     
-    }
-
-    public void OnApplicationQuit()
-    {
-        Debug.Log("게임이 종료되었습니다.");
     }
 }
