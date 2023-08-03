@@ -651,7 +651,7 @@ TextureImporter:
       213: -7160240085823660802
     second: tf_A1_ashlands_2_215
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -672,6 +672,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -710,6 +711,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -749,6 +751,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -5308,6 +5322,223 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      tf_A1_ashlands_2_0: -6698214236254077525
+      tf_A1_ashlands_2_1: 4330066499156347089
+      tf_A1_ashlands_2_10: -7533875426894601186
+      tf_A1_ashlands_2_100: -3413078763053512791
+      tf_A1_ashlands_2_101: 4210865375233099431
+      tf_A1_ashlands_2_102: -3692423409085940844
+      tf_A1_ashlands_2_103: -3554386980436046404
+      tf_A1_ashlands_2_104: 7003892215335940992
+      tf_A1_ashlands_2_105: -4958979059007285823
+      tf_A1_ashlands_2_106: -8078743771663973932
+      tf_A1_ashlands_2_107: -321302752284493878
+      tf_A1_ashlands_2_108: 8309630944982785033
+      tf_A1_ashlands_2_109: -3063157786175704835
+      tf_A1_ashlands_2_11: -4538919451232013965
+      tf_A1_ashlands_2_110: 7791061279043710706
+      tf_A1_ashlands_2_111: -2695574228803335272
+      tf_A1_ashlands_2_112: -9057073328613425429
+      tf_A1_ashlands_2_113: 6312024030420715449
+      tf_A1_ashlands_2_114: 5079282488010441607
+      tf_A1_ashlands_2_115: -8744020501335359180
+      tf_A1_ashlands_2_116: -4287369355222481787
+      tf_A1_ashlands_2_117: 6985503537951546515
+      tf_A1_ashlands_2_118: 5525871506356687973
+      tf_A1_ashlands_2_119: 5086884090521056827
+      tf_A1_ashlands_2_12: -8148891234983745140
+      tf_A1_ashlands_2_120: 1989395340980582771
+      tf_A1_ashlands_2_121: -5806370050050415989
+      tf_A1_ashlands_2_122: -5553938262244126125
+      tf_A1_ashlands_2_123: -8007112860085517705
+      tf_A1_ashlands_2_124: 890179085059890348
+      tf_A1_ashlands_2_125: -5379082782098884981
+      tf_A1_ashlands_2_126: 2984545122872450718
+      tf_A1_ashlands_2_127: 3786279404702506204
+      tf_A1_ashlands_2_128: 6476325694717855590
+      tf_A1_ashlands_2_129: -6733052912434754054
+      tf_A1_ashlands_2_13: -5656592313834577772
+      tf_A1_ashlands_2_130: 4307077212939088863
+      tf_A1_ashlands_2_131: -6440670853030196430
+      tf_A1_ashlands_2_132: 529456162926320156
+      tf_A1_ashlands_2_133: -7843195468334790893
+      tf_A1_ashlands_2_134: 4523564211041394773
+      tf_A1_ashlands_2_135: 2132223422501700407
+      tf_A1_ashlands_2_136: 7836494710500116241
+      tf_A1_ashlands_2_137: 4587118909249564175
+      tf_A1_ashlands_2_138: 8898115369399952279
+      tf_A1_ashlands_2_139: -765275951338325042
+      tf_A1_ashlands_2_14: 2962612455129931133
+      tf_A1_ashlands_2_140: 8075552958382859302
+      tf_A1_ashlands_2_141: -4183185261821751517
+      tf_A1_ashlands_2_142: 2380012243003031591
+      tf_A1_ashlands_2_143: 7642105087992192645
+      tf_A1_ashlands_2_144: -7337641391111366420
+      tf_A1_ashlands_2_145: -4434004118619292183
+      tf_A1_ashlands_2_146: -8725599746127868532
+      tf_A1_ashlands_2_147: 6428417291586149067
+      tf_A1_ashlands_2_148: 4383549556030785837
+      tf_A1_ashlands_2_149: -6686762824280783292
+      tf_A1_ashlands_2_15: 7573120698542651018
+      tf_A1_ashlands_2_150: 7872338312158187245
+      tf_A1_ashlands_2_151: 2557525429126245941
+      tf_A1_ashlands_2_152: 3833354164752154241
+      tf_A1_ashlands_2_153: -2896590371454479067
+      tf_A1_ashlands_2_154: -8373507285787097059
+      tf_A1_ashlands_2_155: -454000158990797848
+      tf_A1_ashlands_2_156: 2559923223319400536
+      tf_A1_ashlands_2_157: -1170047415593748736
+      tf_A1_ashlands_2_158: -2818398591661192512
+      tf_A1_ashlands_2_159: -5662697543501916110
+      tf_A1_ashlands_2_16: -8009906309574572558
+      tf_A1_ashlands_2_160: 6796607843635410127
+      tf_A1_ashlands_2_161: 8450452001808500457
+      tf_A1_ashlands_2_162: -3436866247447727194
+      tf_A1_ashlands_2_163: 6529444391062040995
+      tf_A1_ashlands_2_164: 6335080057821120219
+      tf_A1_ashlands_2_165: 6080107150260126591
+      tf_A1_ashlands_2_166: 985070556670987138
+      tf_A1_ashlands_2_167: -8438018482425939042
+      tf_A1_ashlands_2_168: 7512104072847298980
+      tf_A1_ashlands_2_169: 3651461128385150688
+      tf_A1_ashlands_2_17: -2804389155337109225
+      tf_A1_ashlands_2_170: 8758549461227202897
+      tf_A1_ashlands_2_171: -8661883293215537799
+      tf_A1_ashlands_2_172: 3762276402144083631
+      tf_A1_ashlands_2_173: -6050783412907119045
+      tf_A1_ashlands_2_174: -8364178267968131843
+      tf_A1_ashlands_2_175: -6709777999408263533
+      tf_A1_ashlands_2_176: -1668212039079997845
+      tf_A1_ashlands_2_177: 4167399014112782573
+      tf_A1_ashlands_2_178: -5794239432702042494
+      tf_A1_ashlands_2_179: -5748083738640626235
+      tf_A1_ashlands_2_18: -2940026626059082294
+      tf_A1_ashlands_2_180: -5923345256019158629
+      tf_A1_ashlands_2_181: 7760853521758238564
+      tf_A1_ashlands_2_182: 2418846355433529190
+      tf_A1_ashlands_2_183: 8244813040855212587
+      tf_A1_ashlands_2_184: 1684707455274730905
+      tf_A1_ashlands_2_185: 3985792291486953504
+      tf_A1_ashlands_2_186: -5319175824294861008
+      tf_A1_ashlands_2_187: -1383526182864766139
+      tf_A1_ashlands_2_188: 9020471208048211410
+      tf_A1_ashlands_2_189: 4049083492688601792
+      tf_A1_ashlands_2_19: 3353289762510913475
+      tf_A1_ashlands_2_190: 8930223889914012564
+      tf_A1_ashlands_2_191: -8102763980228844463
+      tf_A1_ashlands_2_192: -5351713601810564229
+      tf_A1_ashlands_2_193: 2561825730710002576
+      tf_A1_ashlands_2_194: -1613888223464363487
+      tf_A1_ashlands_2_195: 3621051637614304814
+      tf_A1_ashlands_2_196: 9191038671468367490
+      tf_A1_ashlands_2_197: -8093245901831927011
+      tf_A1_ashlands_2_198: 1012814069905228696
+      tf_A1_ashlands_2_199: -3657156801862521555
+      tf_A1_ashlands_2_2: -1859061952590046357
+      tf_A1_ashlands_2_20: -5373160487498799090
+      tf_A1_ashlands_2_200: -3709411323214396280
+      tf_A1_ashlands_2_201: 7430451515888873633
+      tf_A1_ashlands_2_202: -3738034265386481940
+      tf_A1_ashlands_2_203: -6343711030326261706
+      tf_A1_ashlands_2_204: 84972553974498580
+      tf_A1_ashlands_2_205: 1386853258620921191
+      tf_A1_ashlands_2_206: -4253182914128348992
+      tf_A1_ashlands_2_207: 2941202531652208674
+      tf_A1_ashlands_2_208: 6991112591269449914
+      tf_A1_ashlands_2_209: 995338245388451808
+      tf_A1_ashlands_2_21: 7603945777939076530
+      tf_A1_ashlands_2_210: -2601635025855821575
+      tf_A1_ashlands_2_211: 2573501020933671784
+      tf_A1_ashlands_2_212: 9190062293945991569
+      tf_A1_ashlands_2_213: 7306453176533194604
+      tf_A1_ashlands_2_214: -1975701959906253402
+      tf_A1_ashlands_2_215: -7160240085823660802
+      tf_A1_ashlands_2_22: -954166036544768550
+      tf_A1_ashlands_2_23: 1172065078967351936
+      tf_A1_ashlands_2_24: 478345499462491686
+      tf_A1_ashlands_2_25: 4577219871716947694
+      tf_A1_ashlands_2_26: 1341870827200208511
+      tf_A1_ashlands_2_27: -6336353901223361438
+      tf_A1_ashlands_2_28: 3391897051237104150
+      tf_A1_ashlands_2_29: -6264160863505775823
+      tf_A1_ashlands_2_3: -7063399996774106352
+      tf_A1_ashlands_2_30: -4527291109728271642
+      tf_A1_ashlands_2_31: -2776982491019407549
+      tf_A1_ashlands_2_32: -6502995237502554852
+      tf_A1_ashlands_2_33: -2589187672034178514
+      tf_A1_ashlands_2_34: 6562505683905075087
+      tf_A1_ashlands_2_35: -5101232488085017895
+      tf_A1_ashlands_2_36: 3395725687862830849
+      tf_A1_ashlands_2_37: 6136711564577472765
+      tf_A1_ashlands_2_38: 4531178134482186029
+      tf_A1_ashlands_2_39: 1743493957008730683
+      tf_A1_ashlands_2_4: -1551361298971150255
+      tf_A1_ashlands_2_40: 704493352589872357
+      tf_A1_ashlands_2_41: 8988188046390661135
+      tf_A1_ashlands_2_42: 8767588703707303074
+      tf_A1_ashlands_2_43: 5220311475761933702
+      tf_A1_ashlands_2_44: 965077571883978524
+      tf_A1_ashlands_2_45: -6365741698525002840
+      tf_A1_ashlands_2_46: -7530153033599790055
+      tf_A1_ashlands_2_47: -2817992232838678412
+      tf_A1_ashlands_2_48: -728812666584577824
+      tf_A1_ashlands_2_49: -8948310222247216566
+      tf_A1_ashlands_2_5: -2897083979207804135
+      tf_A1_ashlands_2_50: -1834878788013628760
+      tf_A1_ashlands_2_51: -6506731094874205227
+      tf_A1_ashlands_2_52: 7994428595000936592
+      tf_A1_ashlands_2_53: 2393274234925679079
+      tf_A1_ashlands_2_54: 2481213373442650755
+      tf_A1_ashlands_2_55: -5998480613470978778
+      tf_A1_ashlands_2_56: -3677609029622074038
+      tf_A1_ashlands_2_57: -7940410649768870551
+      tf_A1_ashlands_2_58: -1199622734993129344
+      tf_A1_ashlands_2_59: -5401361759064612843
+      tf_A1_ashlands_2_6: 2048097517603913620
+      tf_A1_ashlands_2_60: 979736486503134076
+      tf_A1_ashlands_2_61: -2971394602135118693
+      tf_A1_ashlands_2_62: -4556873660154787806
+      tf_A1_ashlands_2_63: 2841666826617668008
+      tf_A1_ashlands_2_64: 8776952180932949407
+      tf_A1_ashlands_2_65: -2131580430523962190
+      tf_A1_ashlands_2_66: 3634422100542591292
+      tf_A1_ashlands_2_67: 44348691606603577
+      tf_A1_ashlands_2_68: 6902432309647913697
+      tf_A1_ashlands_2_69: -6276149342002819397
+      tf_A1_ashlands_2_7: 5447533022564492591
+      tf_A1_ashlands_2_70: -365041968076970062
+      tf_A1_ashlands_2_71: -4278650137103978310
+      tf_A1_ashlands_2_72: -1000065545237120473
+      tf_A1_ashlands_2_73: 6529895185236612790
+      tf_A1_ashlands_2_74: 4801893989582904099
+      tf_A1_ashlands_2_75: 3531077062099644224
+      tf_A1_ashlands_2_76: 236117948559615932
+      tf_A1_ashlands_2_77: -623693557401715847
+      tf_A1_ashlands_2_78: -8735064341762444776
+      tf_A1_ashlands_2_79: 58646910531694843
+      tf_A1_ashlands_2_8: 3513259755185887375
+      tf_A1_ashlands_2_80: 8326225924731745389
+      tf_A1_ashlands_2_81: -4710392248532563921
+      tf_A1_ashlands_2_82: 1825218456127401404
+      tf_A1_ashlands_2_83: 6224000059896717644
+      tf_A1_ashlands_2_84: 7870893977018700679
+      tf_A1_ashlands_2_85: 5244266764373766070
+      tf_A1_ashlands_2_86: -928551247815232989
+      tf_A1_ashlands_2_87: 3552697107035528782
+      tf_A1_ashlands_2_88: -1920943859440533125
+      tf_A1_ashlands_2_89: 5845853708363037643
+      tf_A1_ashlands_2_9: -8579217429282512155
+      tf_A1_ashlands_2_90: 1584911016483029678
+      tf_A1_ashlands_2_91: -3751901519445247806
+      tf_A1_ashlands_2_92: -5350358196584051202
+      tf_A1_ashlands_2_93: 5497978825598806876
+      tf_A1_ashlands_2_94: 6428278393774709789
+      tf_A1_ashlands_2_95: 4595226158709038189
+      tf_A1_ashlands_2_96: 262424452036800704
+      tf_A1_ashlands_2_97: 4177217006407391891
+      tf_A1_ashlands_2_98: 8676909349198098796
+      tf_A1_ashlands_2_99: 2107766126742897723
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

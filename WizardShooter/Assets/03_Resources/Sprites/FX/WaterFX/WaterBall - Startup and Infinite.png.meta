@@ -66,7 +66,7 @@ TextureImporter:
       213: 1903727255042210156
     second: WaterBall - Startup and Infinite_20
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -87,6 +87,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -125,6 +126,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -164,6 +166,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -628,6 +642,28 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      WaterBall - Startup and Infinite_0: 574589816855475242
+      WaterBall - Startup and Infinite_1: 6596514265647100180
+      WaterBall - Startup and Infinite_10: 2483378001060352077
+      WaterBall - Startup and Infinite_11: 1757499603593207575
+      WaterBall - Startup and Infinite_12: 111779283608777272
+      WaterBall - Startup and Infinite_13: -7606141234167354612
+      WaterBall - Startup and Infinite_14: 2007590472581578579
+      WaterBall - Startup and Infinite_15: -6456084630374636216
+      WaterBall - Startup and Infinite_16: 8510017225686055538
+      WaterBall - Startup and Infinite_17: -1391022855413774197
+      WaterBall - Startup and Infinite_18: 8662623693588963061
+      WaterBall - Startup and Infinite_19: 59629614580573977
+      WaterBall - Startup and Infinite_2: 6011167238748529868
+      WaterBall - Startup and Infinite_20: 1903727255042210156
+      WaterBall - Startup and Infinite_3: -8622848702864491455
+      WaterBall - Startup and Infinite_4: 7768799258466593003
+      WaterBall - Startup and Infinite_5: -7205351604573077602
+      WaterBall - Startup and Infinite_6: 8768381355604744468
+      WaterBall - Startup and Infinite_7: -4461313894246207580
+      WaterBall - Startup and Infinite_8: -8619392388275188954
+      WaterBall - Startup and Infinite_9: 1462877456391275288
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
