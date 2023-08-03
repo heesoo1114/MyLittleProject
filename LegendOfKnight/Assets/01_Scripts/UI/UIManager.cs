@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
-
 {
     public TextMeshProUGUI waveTxt;
 
