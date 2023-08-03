@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
@@ -67,16 +65,13 @@ public class PlayerInput : MonoBehaviour
     public void ButtonUp()
     {
         isClick = false;
-        // Debug.Log(clickTime);
 
         if (clickTime >= minClickTime)
         {
-            print("Âß ´©¸£´Ù ¶À");
             TouchUp();
         }
         else
         {
-            print("ÅÍÄ¡");
             Touch();
         }
     }
@@ -86,7 +81,6 @@ public class PlayerInput : MonoBehaviour
         attackCount++;
         startAttack = true;
 
-        // _playerController.isAttack = true;
         _playerController.ChangeState(PlayerState.Attack);
         _playerController.AttackReady(attackCount);
     }

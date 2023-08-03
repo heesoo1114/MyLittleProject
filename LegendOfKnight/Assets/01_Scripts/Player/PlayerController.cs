@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum PlayerState
 {
@@ -31,6 +30,8 @@ public class PlayerController : MonoBehaviour
     [Header("Fight")]
     [SerializeField] private GameObject swrod;
     [SerializeField] private GameObject shield;
+
+    [SerializeField] private UnityEvent<int> AttackEvent = null;
 
     void Awake()
     {
@@ -96,6 +97,7 @@ public class PlayerController : MonoBehaviour
         if (currentState == PlayerState.Shield) return;
 
         _anim.SetTrigger("AttackOn");
+        AttackEvent?.Invoke(AttCnt);
         _sword.Attack(AttCnt);
     }
 
