@@ -6,13 +6,16 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    [SerializeField] private Button _newGameBtn;
+    [SerializeField] private Button _giveUpBtn;
+
     #region PlaySet
 
     [Header("Set")]
     public int mineCnt = 10; // Áö·Ú °³¼ö
 
     [SerializeField] private TextMeshProUGUI _mineCountTxt;
-    
+
     #endregion
 
     #region Timer
@@ -48,6 +51,22 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void WhengGameStart()
+    {
+        StartTimer();
+        _newGameBtn.interactable = false;
+        _giveUpBtn.interactable = true;
+    }
+
+    public void WhenGameOver()
+    {
+        StopTimer();
+        _newGameBtn.interactable = true;
+        _giveUpBtn.interactable = false;
+    }
+
+    #region MineCnt
+
     public void MinePlusBtnPress()
     {
         if (mineCnt == 99) return;
@@ -67,6 +86,10 @@ public class UIManager : MonoBehaviour
         _mineCountTxt.text = mineCnt.ToString();
     }
 
+    #endregion
+
+    #region Timer
+
     public void StartTimer()
     {
         time = 0;
@@ -77,6 +100,10 @@ public class UIManager : MonoBehaviour
     {
         isTimerOn = false;
     }
+
+    #endregion
+
+    #region PanelBtn
 
     public void NewGameBtnPress()
     {
@@ -92,4 +119,6 @@ public class UIManager : MonoBehaviour
     {
         GameManager.Instance.GameQuit();
     }
+
+    #endregion
 }

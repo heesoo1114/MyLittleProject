@@ -61,8 +61,7 @@ public class Block : MonoBehaviour
 
         if (GameManager.Instance.isOver == false && _board.openCount >= 100 - _board.mineCount)
         {
-            GameManager.Instance.isOver = true;
-            Debug.Log("Å¬¸®¾î");
+            GameManager.Instance.GameOver();
         }
     }
 

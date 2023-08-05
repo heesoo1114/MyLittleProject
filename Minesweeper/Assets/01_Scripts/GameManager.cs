@@ -20,17 +20,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // private void Start()
-    // {
-    //     UIManager.Instance.StartTimer();
-    //     PlaySetting();
-    // 
-    //     _board.InitBoard();
-    //     _board.InstantiateBoard();
-    // 
-    //     isOver = false;
-    // }
-
     private void PlaySetting()
     {
         _board.mineCount = UIManager.Instance.mineCnt;
@@ -45,8 +34,9 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        UIManager.Instance.StartTimer();
-        PlaySetting();
+        UIManager.Instance.WhengGameStart();
+        
+        PlaySetting(); // 지뢰 개수를 보내주기 때문에 꼭 아래 보드 설정 전에 실행되어야 함
 
         _board.openCount = 0;
         _board.RemoveBoard();
@@ -58,8 +48,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        UIManager.Instance.StopTimer();
+        UIManager.Instance.WhenGameOver();
+
         isOver = true;
+        
         _board.OpenBoard();
     }
 

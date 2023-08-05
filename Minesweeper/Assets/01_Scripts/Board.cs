@@ -7,8 +7,8 @@ public class Board : MonoBehaviour
 
     int[,] boardInfo = new int[10, 10];
 
-    public int mineCount = 0; // 지뢰개수 0과 100을 제외하고 다 가능
-    public int openCount = 0; // 게임 클리어를 위한 count
+    public int mineCount = 0; // 지뢰개수는 0과 100을 제외하고 다 가능
+    public int openCount = 0; // 게임 클리어를 위한 열린 블록 count
 
     public List<Sprite> spriteList;
 
@@ -85,11 +85,7 @@ public class Board : MonoBehaviour
 
     public void RemoveBoard()
     {
-        if (transform.childCount == 0)
-        {
-            Debug.Log("RemoveBoard : childCount is zero");
-            return;
-        }
+        if (transform.childCount == 0) return;
 
         for (int i = 0; i < 100; i++)
         {
@@ -99,28 +95,11 @@ public class Board : MonoBehaviour
 
     public void OpenBoard()
     {
-        if (transform.childCount == 0)
-        {
-            Debug.LogError("OpenBoard : childCount is zero");
-            return;
-        }
+        if (transform.childCount == 0) return;
 
         for (int i = 0; i < 100; i++)
         {
             transform.GetChild(i).gameObject.GetComponent<Block>().OpenBlock();
-        }
-
-        GameManager.Instance.isOver = true;
-    }
-
-    public void DebugBoardInfo()
-    {
-        for (int y = 0; y < 10; y++)
-        {
-            for (int x = 0; x < 10; x++)
-            {
-                Debug.Log(boardInfo[y, x]);
-            }
         }
     }
 }
