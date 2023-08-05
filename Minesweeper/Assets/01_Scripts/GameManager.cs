@@ -1,3 +1,5 @@
+using TMPro.EditorUtilities;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,8 +9,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Board _board;
 
     public bool isOver = false;
-
-    // 시간 세는 기능 넣기
 
     private void Awake()
     {
@@ -24,14 +24,22 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _board.openCount = 0;
+        isOver = false;
         _board.InitBoard();
         _board.InstantiateBoard();
-        isOver = false;
+        UIManager.Instance.StartTimer();
     }
 
     public void NewGame()
     {
+        if (!isOver)
+        {
+            Debug.Log("게임이 아직 끝나지 않았습니다. " +
+                "지금 당장 새로운 게임을 시작하시고 싶다면 GiveUp 버튼을 눌르고 다시 눌러주세요.");
+            return;
+        }
+
+        UIManager.Instance.StartTimer();
         _board.openCount = 0;
         _board.RemoveBoard();
         _board.InitBoard();
@@ -41,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        UIManager.Instance.StopTimer();
         isOver = true;
         _board.OpenBoard();
     }

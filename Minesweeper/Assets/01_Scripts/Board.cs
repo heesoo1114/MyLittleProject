@@ -1,13 +1,14 @@
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    public GameObject blockPrefab;
+    public Block blockPrefab;
 
     int[,] boardInfo = new int[10, 10];
 
-    public int mineCount = 10; // 지뢰개수 0과 100 X
+    public int mineCount = 0; // 지뢰개수 0과 100을 제외하고 다 가능
     public int openCount = 0; // 게임 클리어를 위한 count
 
     public List<Sprite> spriteList;
@@ -73,13 +74,12 @@ public class Board : MonoBehaviour
         {
             for (int x = 0; x < 10; x++)
             {
-                GameObject block = Instantiate(blockPrefab, this.gameObject.transform);
-                block.name = (y * 10 + (x + 1)).ToString(); // 블록 이름 
-                
-                Block _block = block.GetComponent<Block>();
+                Block block = Instantiate(blockPrefab, gameObject.transform);
 
-                _block.blockID = boardInfo[y, x]; // 블록에 정보 넣어줌
-                _block.SetBlock();
+                block.name = (y * 10 + (x + 1)).ToString(); // 블록 이름 
+                block.blockID = boardInfo[y, x]; // 블록에 정보 넣어줌
+
+                block.SetBlock();
             }
         }
     }
@@ -88,7 +88,7 @@ public class Board : MonoBehaviour
     {
         for (int i = 0; i < 100; i++)
         {
-            Destroy(this.transform.GetChild(i).gameObject);
+            Destroy(transform.GetChild(i).gameObject);
         }
     }
 
@@ -96,7 +96,7 @@ public class Board : MonoBehaviour
     {
         for (int i = 0; i < 100; i++)
         {
-            this.transform.GetChild(i).gameObject.GetComponent<Block>().OpenBlock();
+            transform.GetChild(i).gameObject.GetComponent<Block>().OpenBlock();
         }
 
         GameManager.Instance.isOver = true;
