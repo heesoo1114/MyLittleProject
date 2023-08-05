@@ -1,5 +1,3 @@
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -22,12 +20,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    // private void Start()
+    // {
+    //     UIManager.Instance.StartTimer();
+    //     PlaySetting();
+    // 
+    //     _board.InitBoard();
+    //     _board.InstantiateBoard();
+    // 
+    //     isOver = false;
+    // }
+
+    private void PlaySetting()
     {
-        isOver = false;
-        _board.InitBoard();
-        _board.InstantiateBoard();
-        UIManager.Instance.StartTimer();
+        _board.mineCount = UIManager.Instance.mineCnt;
     }
 
     public void NewGame()
@@ -40,10 +46,13 @@ public class GameManager : MonoBehaviour
         }
 
         UIManager.Instance.StartTimer();
+        PlaySetting();
+
         _board.openCount = 0;
         _board.RemoveBoard();
         _board.InitBoard();
         _board.InstantiateBoard();
+        
         isOver = false;
     }
 

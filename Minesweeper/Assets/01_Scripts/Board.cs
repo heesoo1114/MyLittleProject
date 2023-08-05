@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Board : MonoBehaviour
@@ -86,6 +85,12 @@ public class Board : MonoBehaviour
 
     public void RemoveBoard()
     {
+        if (transform.childCount == 0)
+        {
+            Debug.Log("RemoveBoard : childCount is zero");
+            return;
+        }
+
         for (int i = 0; i < 100; i++)
         {
             Destroy(transform.GetChild(i).gameObject);
@@ -94,6 +99,12 @@ public class Board : MonoBehaviour
 
     public void OpenBoard()
     {
+        if (transform.childCount == 0)
+        {
+            Debug.LogError("OpenBoard : childCount is zero");
+            return;
+        }
+
         for (int i = 0; i < 100; i++)
         {
             transform.GetChild(i).gameObject.GetComponent<Block>().OpenBlock();

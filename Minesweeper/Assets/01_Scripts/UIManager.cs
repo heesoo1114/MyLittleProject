@@ -1,15 +1,30 @@
-using TMPro;
+using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    private float time = 0;
+    #region PlaySet
+
+    [Header("Set")]
+    public int mineCnt = 10; // Áö·Ú °³¼ö
+
+    [SerializeField] private TextMeshProUGUI _mineCountTxt;
+    
+    #endregion
+
+    #region Timer
+
+    [Header("Timer")]
     public bool isTimerOn = false;
+    private float time = 0;
 
     [SerializeField] private TextMeshProUGUI _secondTxt;
     [SerializeField] private TextMeshProUGUI _minuteTxt;
+
+    #endregion
 
     private void Awake()
     {
@@ -31,6 +46,25 @@ public class UIManager : MonoBehaviour
             _secondTxt.text = ((int)time % 60).ToString();
             _minuteTxt.text = ((int)time / 60).ToString();
         }
+    }
+
+    public void MinePlusBtnPress()
+    {
+        if (mineCnt == 99) return;
+        mineCnt++;
+        MineCntTxtUpdate();
+    }
+
+    public void MineMinusBtnPress()
+    {
+        if (mineCnt == 0) return;
+        mineCnt--;
+        MineCntTxtUpdate();
+    }
+
+    private void MineCntTxtUpdate()
+    {
+        _mineCountTxt.text = mineCnt.ToString();
     }
 
     public void StartTimer()
